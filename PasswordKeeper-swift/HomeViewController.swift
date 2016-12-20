@@ -10,12 +10,20 @@ import UIKit
 
 class HomeViewController: UITableViewController {
     
+    var infos: Array<DataInfoModel>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
         
         //TODO 从本地数据库中获取数据
+        self.infos.append(DataInfoModel(caption: "Cell text1", account: "Cell Subtitle"))
+        self.infos.append(DataInfoModel(caption: "Cell text2", account: "Cell Subtitle"))
+        self.infos.append(DataInfoModel(caption: "Cell text3", account: "Cell Subtitle"))
+        self.infos.append(DataInfoModel(caption: "Cell text4", account: "Cell Subtitle"))
+        self.infos.append(DataInfoModel(caption: "Cell text5", account: "Cell Subtitle"))
+        self.infos.append(DataInfoModel(caption: "Cell text6", account: "Cell Subtitle"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,7 +32,6 @@ class HomeViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,7 +44,7 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return infos.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -52,6 +59,7 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

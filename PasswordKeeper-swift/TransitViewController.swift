@@ -20,19 +20,14 @@ class TransitViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.71)
+        view.backgroundColor = UIColor.init(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.71)
         
-        let label = UILabel(frame:CGRect(x:10, y:20, width:300, height:100))
-        label.text = "Hello"
-        label.textColor = UIColor.red
-        view.addSubview(label)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.hidesBackButton = true
+//        let example: Array<columeType> = [columeType(name: "aaa", type: "integer"), columeType(name: "bbb", type: "integer")]
+//        let tableStructEmample = TableStruct<columeType>(tableName: "table1", primaryKey: "Id", struction: example)
+//        print(tableStructEmample.tableName)
+//        print(tableStructEmample.primaryKey)
+//        print(tableStructEmample.struction?[0].name)
     }
     
     override func didReceiveMemoryWarning() {

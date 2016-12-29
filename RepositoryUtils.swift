@@ -17,25 +17,39 @@ class Repository {
     }
     
     // 创建表
-    public func createTable(table: TableStruct<columeType>) -> CInt {
+    public func createTable(table: TableStruct<ColumeType>) -> CInt {
         let tableName = table.tableName
         let primary = table.primaryKey
         var sql = "create table if not exists '\(tableName)'('\(primary)' varchar(100) primary key, "
         for (index, value) in (table.struction?.enumerated())! {
             if index == table.struction?.count {
-                sql += "'\(value.name!)' '\(value.type!)', "
+                sql += "'\(value.name!)' '\(value.type!)' "
             }
             else{
-                sql += "'\(value.name!)' '\(value.type!)'"
+                sql += "'\(value.name!)' '\(value.type!)',"
             }
         }
         return db.execute(sql: sql)
     }
     
     // 存入数据或更新数据
-    public func addOrUpdate<T>(data: T) -> CInt {
-        
-        return 0
+    public func addOrUpdate<T>(tableName: String, data: [T]) -> CInt {
+        var index: CInt = 0;
+        for value in data {
+            if checkExist(key: "") {
+                // update
+                index += 1;
+            }
+            else{
+                // add
+                index += 1;
+            }
+        }
+        return index
+    }
+    
+    private func checkExist(key: String) -> Bool {
+        return true
     }
     
     // 删除数据（所有数据或删除符合条件的数据）
@@ -57,7 +71,7 @@ class TableStruct<T> {
     }
 }
 
-class columeType {
+class ColumeType {
     var name: String?      // 列名
     var type: String?      // 类型
     

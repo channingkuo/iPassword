@@ -28,6 +28,16 @@ class TransitViewController: UIViewController {
 //        print(tableStructEmample.tableName)
 //        print(tableStructEmample.primaryKey)
 //        print(tableStructEmample.struction?[0].name)
+        
+//        var a: Repository
+//        a = Repository()
+//        let aa = ColumeType(name: "ttt", type: "yyyy")
+//        var b = a.create(data: aa)
+        
+//        let aa = ColumeType(name: "9", type: "9")
+//        var aaa = aa.propertyNames()
+//        let aaaaa = aa.value(forKey: "name")
+//        print(aaaaa!)
     }
     
     override func didReceiveMemoryWarning() {

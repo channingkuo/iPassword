@@ -10,10 +10,10 @@ import Foundation
 
 class Repository {
     
-    private var db: SQLiteDB!
+    private static var db: SQLiteDB!
     
     init() {
-        db = SQLiteDB.sharedInstance
+        Repository.db = SQLiteDB.sharedInstance
     }
     
     // 创建表
@@ -59,24 +59,28 @@ class Repository {
                 sql += " '\(value)' '\(data.value(forKey: value)!)') "
             }
         }
-        return db.execute(sql: sql)
+        return Repository.db.execute(sql: sql)
     }
     
     // 存入数据
     public func syncInsert<T: NSObject>(data: [T]) -> CInt {
-        
-        return 0
+        var iterator: CInt = 0
+        for value in data {
+            iterator += addOrUpdate(data: value)
+        }
+        return iterator
     }
     
     // 插入数据或更新数据
     public func addOrUpdate<T: NSObject>(data: T) -> CInt {
         let propertyName = data.propertyNames()
+        // 表名值
         let tableName = data.value(forKey: "tableName")
+        // 主键值
         let primaryKey = data.value(forKey: "primaryKey")
         let id = checkExist(tableName: tableName as! String, key: primaryKey as! String)
         if id.isEmpty {
             // Update
-            // update '\(tableName!)' set 列名 = 值, 列名 = 值....
             var sqlUpdate = "update '\(tableName!)' set "
             for (index, value) in propertyName.enumerated() {
                 if index != propertyName.count {
@@ -86,12 +90,12 @@ class Repository {
                     sqlUpdate += " '\(value)' = '\(data.value(forKey: value)!)' "
                 }
             }
-            // 添加更新条件
-            return db.execute(sql: sqlUpdate)
+            // 添加where条件
+            sqlUpdate += " where '\(tableName!)'Id = '\(primaryKey)' "
+            return Repository.db.execute(sql: sqlUpdate)
         }
         else{
             // Add
-            // insert into t_user(uname,mobile) values('\(uname)','\(mobile)')
             var sqlAdd = "insert into '\(tableName!)'("
             for value in propertyName {
                 sqlAdd += " '\(value)', "
@@ -101,19 +105,26 @@ class Repository {
                 sqlAdd += " '\(data.value(forKey: value)!)', "
             }
             sqlAdd = sqlAdd.subString(start: 0, length: sqlAdd.characters.count - 1) + ")"
-            return db.execute(sql: sqlAdd)
+            return Repository.db.execute(sql: sqlAdd)
         }
     }
     
-    // 删除数据（所有数据或删除符合条件的数据）
-    public func delete() -> CInt {
+    // 删除数据
+    public func delete<T: NSObject>(data: T) -> CInt {
         
         return 0
     }
     
+    // 删除数据
+    public func deleteAll(tableName: String) -> CInt {
+        let sql = "delete from '\(tableName)' "
+        return Repository.db.execute(sql: sql)
+    }
+    
+    // 检查记录在表中是否存在
     private func checkExist(tableName: String, key: String) -> String {
         let sql = "select top 1 '\(tableName)'Id from '\(tableName)' where '\(tableName)'Id = '\(key)'"
-        let data = db.query(sql: sql)
+        let data = Repository.db.query(sql: sql)
         if(data.count > 0){
             let info = data[data.count - 1]
             return (info["'\(tableName)'Id"] as! String)
@@ -149,7 +160,6 @@ class ColumeType: NSObject {
 }
 
 extension NSObject {
-    
     // Retrieves an array of property names found on the current object
     func propertyNames() -> [String] {
         var results = [String]()

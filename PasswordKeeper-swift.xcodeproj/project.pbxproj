@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D75DEB051E1B6F6200792AE9 /* SQliteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75DEB041E1B6F6200792AE9 /* SQliteRepository.swift */; };
 		D7625DA81E0CEAA600B01DE1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */; };
 		D7E6F2F81E0CF02C0065A85F /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6F2F51E0CF02C0065A85F /* SQLiteDB.swift */; };
 		D7E6F2F91E0CF02C0065A85F /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6F2F61E0CF02C0065A85F /* SQLTable.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		D744D66D1E076BD700750584 /* PasswordKeeper-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PasswordKeeper-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D75DEB041E1B6F6200792AE9 /* SQliteRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQliteRepository.swift; sourceTree = "<group>"; };
 		D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D7E6F2F41E0CF02C0065A85F /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "PasswordKeeper-swift/Bridging-Header.h"; sourceTree = "<group>"; };
 		D7E6F2F51E0CF02C0065A85F /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = "PasswordKeeper-swift/SQLiteDB.swift"; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				D7E6F3121E0CF3E10065A85F /* RepositoryUtils.swift */,
+				D75DEB041E1B6F6200792AE9 /* SQliteRepository.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7E6F3061E0CF0460065A85F /* AppDelegate.swift in Sources */,
+				D75DEB051E1B6F6200792AE9 /* SQliteRepository.swift in Sources */,
 				D7E6F3131E0CF3E10065A85F /* RepositoryUtils.swift in Sources */,
 				D7E6F3001E0CF0380065A85F /* HomeViewController.swift in Sources */,
 				D7E6F2F81E0CF02C0065A85F /* SQLiteDB.swift in Sources */,

@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D75DEB051E1B6F6200792AE9 /* SQliteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75DEB041E1B6F6200792AE9 /* SQliteRepository.swift */; };
 		D7625DA81E0CEAA600B01DE1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */; };
+		D7944F481E1CA22800B21C53 /* SQliteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7944F471E1CA22800B21C53 /* SQliteRepository.swift */; };
+		D7944F4A1E1CA23800B21C53 /* ReadWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7944F491E1CA23800B21C53 /* ReadWriteViewController.swift */; };
 		D7E6F2F81E0CF02C0065A85F /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6F2F51E0CF02C0065A85F /* SQLiteDB.swift */; };
 		D7E6F2F91E0CF02C0065A85F /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6F2F61E0CF02C0065A85F /* SQLTable.swift */; };
 		D7E6F2FA1E0CF02C0065A85F /* String-Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6F2F71E0CF02C0065A85F /* String-Extras.swift */; };
@@ -22,13 +23,13 @@
 		D7E6F30D1E0CF0840065A85F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7E6F3091E0CF0840065A85F /* LaunchScreen.storyboard */; };
 		D7E6F30E1E0CF0840065A85F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7E6F30B1E0CF0840065A85F /* Main.storyboard */; };
 		D7E6F3111E0CF1660065A85F /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = D7E6F3101E0CF1660065A85F /* data.db */; };
-		D7E6F3131E0CF3E10065A85F /* RepositoryUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6F3121E0CF3E10065A85F /* RepositoryUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D744D66D1E076BD700750584 /* PasswordKeeper-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PasswordKeeper-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D75DEB041E1B6F6200792AE9 /* SQliteRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQliteRepository.swift; sourceTree = "<group>"; };
 		D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D7944F471E1CA22800B21C53 /* SQliteRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQliteRepository.swift; path = "PasswordKeeper-swift/SQliteRepository.swift"; sourceTree = "<group>"; };
+		D7944F491E1CA23800B21C53 /* ReadWriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReadWriteViewController.swift; path = "PasswordKeeper-swift/ReadWriteViewController.swift"; sourceTree = "<group>"; };
 		D7E6F2F41E0CF02C0065A85F /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "PasswordKeeper-swift/Bridging-Header.h"; sourceTree = "<group>"; };
 		D7E6F2F51E0CF02C0065A85F /* SQLiteDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = "PasswordKeeper-swift/SQLiteDB.swift"; sourceTree = "<group>"; };
 		D7E6F2F61E0CF02C0065A85F /* SQLTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLTable.swift; path = "PasswordKeeper-swift/SQLTable.swift"; sourceTree = "<group>"; };
@@ -43,7 +44,6 @@
 		D7E6F30A1E0CF0840065A85F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "PasswordKeeper-swift/Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		D7E6F30C1E0CF0840065A85F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "PasswordKeeper-swift/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		D7E6F3101E0CF1660065A85F /* data.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = data.db; path = "PasswordKeeper-swift/data.db"; sourceTree = "<group>"; };
-		D7E6F3121E0CF3E10065A85F /* RepositoryUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				D7E6F2FB1E0CF0380065A85F /* DataInfoModel.swift */,
-				D7E6F2FC1E0CF0380065A85F /* HomeViewController.swift */,
 				D7E6F2FD1E0CF0380065A85F /* TableViewCell.swift */,
 				D7E6F2FE1E0CF0380065A85F /* TransitViewController.swift */,
+				D7E6F2FC1E0CF0380065A85F /* HomeViewController.swift */,
+				D7944F491E1CA23800B21C53 /* ReadWriteViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -132,8 +133,7 @@
 		D7E6F3141E0CF3E80065A85F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D7E6F3121E0CF3E10065A85F /* RepositoryUtils.swift */,
-				D75DEB041E1B6F6200792AE9 /* SQliteRepository.swift */,
+				D7944F471E1CA22800B21C53 /* SQliteRepository.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -214,14 +214,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7E6F3061E0CF0460065A85F /* AppDelegate.swift in Sources */,
-				D75DEB051E1B6F6200792AE9 /* SQliteRepository.swift in Sources */,
-				D7E6F3131E0CF3E10065A85F /* RepositoryUtils.swift in Sources */,
+				D7944F481E1CA22800B21C53 /* SQliteRepository.swift in Sources */,
 				D7E6F3001E0CF0380065A85F /* HomeViewController.swift in Sources */,
 				D7E6F2F81E0CF02C0065A85F /* SQLiteDB.swift in Sources */,
 				D7E6F3021E0CF0380065A85F /* TransitViewController.swift in Sources */,
 				D7E6F2FF1E0CF0380065A85F /* DataInfoModel.swift in Sources */,
 				D7E6F3011E0CF0380065A85F /* TableViewCell.swift in Sources */,
 				D7E6F2FA1E0CF02C0065A85F /* String-Extras.swift in Sources */,
+				D7944F4A1E1CA23800B21C53 /* ReadWriteViewController.swift in Sources */,
 				D7E6F2F91E0CF02C0065A85F /* SQLTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

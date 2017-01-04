@@ -12,53 +12,42 @@ import Foundation
 class HomeViewController: UITableViewController {
     
     var infos = [DataInfoModel]()
+    var infoInTableRows = [[String: Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "PswwordKeeper"
+        navigationItem.title = "PasswordKeeper"
         navigationController?.isNavigationBarHidden = false
         navigationItem.hidesBackButton = true
         // 去掉tableView下面多余空行的分割线
         self.tableView.tableFooterView = UIView()
         
-        //TODO 从本地数据库中获取数据
-        let info1 = DataInfoModel(key: UUID().uuidString)
-        info1.index = 1
-        info1.account = "492689363"
-        info1.caption = "QQ"
-        info1.iconName = "default_icon.png"
-        info1.lastEditTime = NSDate()
-        info1.password = "1234567890"
-        let info2 = DataInfoModel(key: UUID().uuidString)
-        info2.index = 0
-        info2.account = "wangji-_--"
-        info2.caption = "WeChat"
-        info2.iconName = "default_icon.png"
-        info2.lastEditTime = NSDate()
-        info2.password = "123457890"
-        let info3 = DataInfoModel(key: UUID().uuidString)
-        info3.index = 2
-        info3.account = "channingwei"
-        info3.caption = "GitHub"
-        info3.iconName = "default_icon.png"
-        info3.lastEditTime = NSDate()
-        info3.password = "1234567890"
+        // 新增按钮
+        let itemButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(HomeViewController.pushInReadWriteView))
+        navigationItem.setRightBarButton(itemButton, animated: false)
+        // 设置所有的导航栏返回按钮的title
+        let item = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = item;
+    }
+    
+    func pushInReadWriteView() {
+        navigationController?.pushViewController(ReadWriteViewContrller(viewTitle: "", dataInfoKey: ""), animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        infos += [info1, info2, info3]
+        // 从本地数据库中获取数据
+        infoInTableRows = SQliteRepository.getData(tableName: SQliteRepository.PASSWORDINFOTABLE)
         
-        if infos.count == 0 {
+        if infoInTableRows.count == 0 {
             let bgView = UILabel(frame: CGRect(x: 0, y: self.tableView.bounds.height / 2, width: self.tableView.bounds.width, height: 20))
             bgView.text = "还没有记录，赶紧去添加吧..."
             bgView.textAlignment = NSTextAlignment.center
             bgView.textColor = UIColor.init(red: 136, green: 136, blue: 136, alpha: 0)
             self.tableView.backgroundView = bgView
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         self.tableView.reloadData()
     }
     
@@ -76,7 +65,7 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return infos.count
+        return infoInTableRows.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -100,7 +89,8 @@ class HomeViewController: UITableViewController {
             return
         }
         _ = infos[indexPath.row]
-        // TODO 详细内容
+        // 详细内容
+        navigationController?.pushViewController(ReadWriteViewContrller(viewTitle: "", dataInfoKey: ""), animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

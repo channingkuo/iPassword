@@ -11,7 +11,6 @@ import Foundation
 
 class HomeViewController: UITableViewController {
     
-    var infos = [DataInfoModel]()
     var infoInTableRows = [[String: Any]]()
     
     override func viewDidLoad() {
@@ -32,7 +31,7 @@ class HomeViewController: UITableViewController {
     }
     
     func pushInReadWriteView() {
-        navigationController?.pushViewController(ReadWriteViewContrller(viewTitle: "", dataInfoKey: ""), animated: true)
+        navigationController?.pushViewController(ReadWriteViewContrller(viewTitle: "New", dataInfoKey: ""), animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +39,7 @@ class HomeViewController: UITableViewController {
         
         // 从本地数据库中获取数据
         infoInTableRows = SQliteRepository.getData(tableName: SQliteRepository.PASSWORDINFOTABLE)
+        print(infoInTableRows)
         
         if infoInTableRows.count == 0 {
             let bgView = UILabel(frame: CGRect(x: 0, y: self.tableView.bounds.height / 2, width: self.tableView.bounds.width, height: 20))
@@ -73,24 +73,23 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        if infos.count < indexPath.row {
+        if infoInTableRows.count < indexPath.row {
             return UITableViewCell()
         }
-        
-        let info = infos[indexPath.row]
-        let cellIdentifier = info.key
+        let info = infoInTableRows[indexPath.row]
+        let cellIdentifier = info["key"] as? String
         let cell: TableViewCell = TableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier) as UITableViewCell as! TableViewCell
         cell.updateUIInformation(info: info)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if infos.count < indexPath.row {
+        if infoInTableRows.count < indexPath.row {
             return
         }
-        _ = infos[indexPath.row]
+        let info = infoInTableRows[indexPath.row]
         // 详细内容
-        navigationController?.pushViewController(ReadWriteViewContrller(viewTitle: "", dataInfoKey: ""), animated: true)
+        navigationController?.pushViewController(ReadWriteViewContrller(viewTitle: info["caption"] as! String, dataInfoKey: info["dataInfoTableId"] as! String?), animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -103,17 +102,24 @@ class HomeViewController: UITableViewController {
             return
         }
         
-        if infos.count < indexPath.row {
+        if infoInTableRows.count < indexPath.row {
             return
         }
-        //TODO 删掉一条数据
-        let info = infos[indexPath.row]
-        for (index, value) in infos.enumerated() {
-            if value.key == info.key {
-                infos.remove(at: index)
+        // 删掉一条数据
+        let info = infoInTableRows[indexPath.row]
+        for (index, value) in infoInTableRows.enumerated() {
+            if value["key"] as? String == info["key"] as? String {
+                self.infoInTableRows.remove(at: index)
             }
         }
-        if infos.count == 0 {
+        
+        // 同步SQlite数据库
+        var cols = [ColumnType]()
+        let col = ColumnType(colName: "key", colType: nil, colValue: info["key"] as? String)
+        cols += [col]
+        _ = SQliteRepository.delete(tableName: SQliteRepository.PASSWORDINFOTABLE, columns: cols)
+        
+        if infoInTableRows.count == 0 {
             let bgView = UILabel(frame: CGRect(x: 0, y: self.tableView.bounds.height / 2, width: self.tableView.bounds.width, height: 20))
             bgView.text = "还没有记录，赶紧去添加吧..."
             bgView.textAlignment = NSTextAlignment.center

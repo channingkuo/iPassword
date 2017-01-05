@@ -23,23 +23,23 @@ class TableViewCell : UITableViewCell{
         
         caption = UILabel()
         caption.font = UIFont.boldSystemFont(ofSize: 16)
-        caption.textColor = UIColor.black
-        caption.textAlignment = NSTextAlignment.left
-        caption.backgroundColor = UIColor.clear
+        caption.textColor = .black
+        caption.textAlignment = .left
+        caption.backgroundColor = .clear
         contentView.addSubview(caption)
         
         account = UILabel()
         account.font = UIFont.boldSystemFont(ofSize: 14)
-        account.textColor = UIColor.gray
-        account.textAlignment = NSTextAlignment.left
-        account.backgroundColor = UIColor.clear
+        account.textColor = .gray
+        account.textAlignment = .left
+        account.backgroundColor = .clear
         contentView.addSubview(account)
         
         lastEditTime = UILabel()
         lastEditTime.font = UIFont.boldSystemFont(ofSize: 14)
-        lastEditTime.textColor = UIColor.gray
-        lastEditTime.textAlignment = NSTextAlignment.left
-        lastEditTime.backgroundColor = UIColor.clear
+        lastEditTime.textColor = .gray
+        lastEditTime.textAlignment = .right
+        lastEditTime.backgroundColor = .clear
         
         contentView.addSubview(lastEditTime)
     }
@@ -54,16 +54,14 @@ class TableViewCell : UITableViewCell{
         iconView.frame = CGRect(x: 15, y: 14.5, width: 36, height: 36)
         caption.frame = CGRect(x: 61, y: 10, width: contentView.bounds.width - 165, height: 26)
         account.frame = CGRect(x: 61, y: 32, width: contentView.bounds.width - 65, height: 24)
-        lastEditTime.frame = CGRect(x: contentView.bounds.width - 80, y: 20, width: 80, height: 26)
+        lastEditTime.frame = CGRect(x: contentView.bounds.width - 160, y: 20, width: 150, height: 26)
     }
     
-    public func updateUIInformation(info: DataInfoModel){
-        iconView.image = UIImage.init(named: info.iconName!)
-        caption.text = info.caption
-        account.text = info.account
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MM yy"
-        lastEditTime.text = dateFormatter.string(from: info.lastEditTime as! Date)
+    public func updateUIInformation(info: [String: Any]) {
+        iconView.image = UIImage.init(named: (info["iconName"] as? String)!)
+        caption.text = info["caption"] as! String?
+        account.text = info["account"] as! String?
+        lastEditTime.text = DateTimeUtils.dateTimeFormatter(dateTime: info["lastEditTime"] as! NSDate, isShowTime: true)
     }
 }
 

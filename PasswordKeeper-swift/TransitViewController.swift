@@ -30,9 +30,10 @@ class TransitViewController: UIViewController {
         let col3 = ColumnType(colName: "password", colType: "varchar(100)", colValue: nil)
         let col4 = ColumnType(colName: "iconName", colType: "varchar(100)", colValue: nil)
         let col5 = ColumnType(colName: "lastEditTime", colType: "datetime", colValue: nil)
-        let col6 = ColumnType(colName: "key", colType: "varchar(100)", colValue: nil)
-        let col7 = ColumnType(colName: "indexKey", colType: "int not null", colValue: nil)
-        dataInfoTable += [col1, col2, col3, col4, col5, col6, col7]
+        let col6 = ColumnType(colName: "remark", colType: "varchar(200)", colValue: nil)
+        let col7 = ColumnType(colName: "key", colType: "varchar(100) not null", colValue: nil)
+        let col8 = ColumnType(colName: "indexKey", colType: "int not null", colValue: nil)
+        dataInfoTable += [col1, col2, col3, col4, col5, col6, col7, col8]
         SQliteRepository.createTable(tableName: SQliteRepository.PASSWORDINFOTABLE, columns: dataInfoTable)
         
 //        var oo = [ColumnType]()

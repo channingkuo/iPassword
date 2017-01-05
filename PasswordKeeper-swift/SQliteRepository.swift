@@ -59,24 +59,34 @@ class SQliteRepository {
             // Add
             var sqlAdd = "insert into \(tableName)("
             for col in colValue {
+                if col.colName == "\(tableName)Id" {
+                    continue
+                }
                 sqlAdd += "\(col.colName), "
             }
             sqlAdd += "\(tableName)Id) values("
             for col in colValue {
+                if col.colName == "\(tableName)Id" {
+                    continue
+                }
                 sqlAdd += "'\(col.colValue!)', "
             }
-            sqlAdd += "'" + UUID().uuidString + "')"
+            let parimaryKey = id.isEmpty ? UUID().uuidString : id
+            sqlAdd += "'" + parimaryKey + "')"
             return SQliteRepository.db.execute(sql: sqlAdd)
         }
         else {
             // Update
             var sqlUpdate = "update \(tableName) set "
             for col in colValue {
-                sqlUpdate += "\(col.colName) = \(col.colValue!), "
+                if col.colName == "\(tableName)Id" {
+                    continue
+                }
+                sqlUpdate += "\(col.colName) = '\(col.colValue!)', "
             }
             sqlUpdate = sqlUpdate.subString(start: 0, length: sqlUpdate.characters.count - 2)
             // 添加where条件
-            sqlUpdate += "where \(tableName)Id = '\(id)'"
+            sqlUpdate += " where \(tableName)Id = '\(id)'"
             return SQliteRepository.db.execute(sql: sqlUpdate)
         }
     }
@@ -118,7 +128,7 @@ public struct ColumnType {
     var colType: String?
     var colValue: Any?
     
-    init(colName: String, colType: String?, colValue: String?) {
+    init(colName: String, colType: String?, colValue: Any?) {
         self.colName = colName
         self.colType = colType
         self.colValue = colValue

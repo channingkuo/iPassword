@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D7625DA81E0CEAA600B01DE1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */; };
+		D76CB2751E1E3A0100F13AC3 /* DateTimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76CB2741E1E3A0100F13AC3 /* DateTimeUtils.swift */; };
 		D7944F481E1CA22800B21C53 /* SQliteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7944F471E1CA22800B21C53 /* SQliteRepository.swift */; };
 		D7944F4A1E1CA23800B21C53 /* ReadWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7944F491E1CA23800B21C53 /* ReadWriteViewController.swift */; };
 		D7E6F2F81E0CF02C0065A85F /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E6F2F51E0CF02C0065A85F /* SQLiteDB.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		D744D66D1E076BD700750584 /* PasswordKeeper-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PasswordKeeper-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D76CB2741E1E3A0100F13AC3 /* DateTimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTimeUtils.swift; path = "PasswordKeeper-swift/DateTimeUtils.swift"; sourceTree = "<group>"; };
 		D7944F471E1CA22800B21C53 /* SQliteRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQliteRepository.swift; path = "PasswordKeeper-swift/SQliteRepository.swift"; sourceTree = "<group>"; };
 		D7944F491E1CA23800B21C53 /* ReadWriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReadWriteViewController.swift; path = "PasswordKeeper-swift/ReadWriteViewController.swift"; sourceTree = "<group>"; };
 		D7E6F2F41E0CF02C0065A85F /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "PasswordKeeper-swift/Bridging-Header.h"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				D7944F471E1CA22800B21C53 /* SQliteRepository.swift */,
+				D76CB2741E1E3A0100F13AC3 /* DateTimeUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				D7E6F2F81E0CF02C0065A85F /* SQLiteDB.swift in Sources */,
 				D7E6F3021E0CF0380065A85F /* TransitViewController.swift in Sources */,
 				D7E6F2FF1E0CF0380065A85F /* DataInfoModel.swift in Sources */,
+				D76CB2751E1E3A0100F13AC3 /* DateTimeUtils.swift in Sources */,
 				D7E6F3011E0CF0380065A85F /* TableViewCell.swift in Sources */,
 				D7E6F2FA1E0CF02C0065A85F /* String-Extras.swift in Sources */,
 				D7944F4A1E1CA23800B21C53 /* ReadWriteViewController.swift in Sources */,

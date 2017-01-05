@@ -3,7 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "HomeViewController.viewDidLoad() -&gt; ():HomeViewController.swift">
+         contextName = "ReadWriteViewContrller.viewWillAppear(Bool) -&gt; ():ReadWriteViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataInfoKey">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "TransitViewController.viewDidLoad() -&gt; ():TransitViewController.swift">
@@ -15,6 +20,9 @@
                value = "infos.count">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.viewDidLoad() -&gt; ():HomeViewController.swift">
       </ContextState>
       <ContextState
          contextName = "static SQliteRepository.delete(tableName : String, columns : [ColumnType]) -&gt; Int32:SQliteRepository.swift">

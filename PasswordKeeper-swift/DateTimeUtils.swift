@@ -42,6 +42,7 @@ class DateTimeUtils {
     }
 }
 
+// 扩展NSDate, 添加获取某个日期的星期数
 extension NSDate {
     func dayOfWeek() -> String {
         let week = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]

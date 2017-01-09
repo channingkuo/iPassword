@@ -12,6 +12,7 @@ import Foundation
 class HomeViewController: UITableViewController {
     
     var infoInTableRows = [[String: Any]]()
+    var isFirstPinched = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,22 @@ class HomeViewController: UITableViewController {
         // 设置所有的导航栏返回按钮的title
         let item = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem = item;
+        
+        // 添加后门
+        //let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(_: )))
+        let pinchGesture = UITapGestureRecognizer(target: self, action: #selector(pinchAction(_: )))
+        view.addGestureRecognizer(pinchGesture)
     }
     
+    // pinch手势监视事件
+    func pinchAction(_ recognizer: UIPinchGestureRecognizer){
+        if !self.isFirstPinched {
+            navigationController?.pushViewController(BackDoorViewController(), animated: true)
+        }
+        self.isFirstPinched = true
+    }
+    
+    // add按钮事件
     func pushInReadWriteView() {
         navigationController?.pushViewController(ReadWriteViewContrller(viewTitle: "New", dataInfoKey: ""), animated: true)
     }
@@ -37,6 +52,7 @@ class HomeViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.isFirstPinched = false
         // 从本地数据库中获取数据
         infoInTableRows = SQliteRepository.getData(tableName: SQliteRepository.PASSWORDINFOTABLE)
         print(infoInTableRows)

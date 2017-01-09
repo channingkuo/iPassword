@@ -111,6 +111,7 @@ class ReadWriteViewContrller: UIViewController {
         remark?.layer.borderColor = UIColor.init(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 240.0 / 255.0, alpha: 1).cgColor
         remark?.isEditable = true
         remark?.dataDetectorTypes = .all
+        remark?.font = UIFont.boldSystemFont(ofSize: 14)
         view.addSubview(remark!)
     }
     
@@ -138,12 +139,7 @@ class ReadWriteViewContrller: UIViewController {
             errorMsg = errorMsg.subString(start: 0, length: errorMsg.characters.count - 2)
             errorMsg += " can't be empty!"
             
-            let emptyAlert = UIAlertController.init(title: nil, message: errorMsg, preferredStyle: .alert)
-            present(emptyAlert, animated: true, completion: nil)
-            // 2秒后UIAlertController自动消失
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                self.presentedViewController?.dismiss(animated: false, completion: nil)
-            }
+            AlertControllerUtils.alertAutoDismission(title: nil, message: errorMsg, target: self)
             return
         }
         

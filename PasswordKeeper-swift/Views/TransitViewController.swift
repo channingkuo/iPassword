@@ -55,6 +55,15 @@ class TransitViewController: UIViewController {
 //        print(iu)
 //        let ppp = SQliteRepository.getData(tableName: "test")
 //        print(ppp)
+        //private var _index: Int?
+        //public var index: Int? {
+        //get{
+        //    return self._index
+        //}
+        //set(value){
+        //    self._index = value
+        //}
+        //}
     }
     
     override func didReceiveMemoryWarning() {

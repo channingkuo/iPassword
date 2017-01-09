@@ -1,0 +1,11 @@
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\bin\Debug\TestConsole.exe.config
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\bin\Debug\TestConsole.exe
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\bin\Debug\TestConsole.pdb
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\bin\Debug\PasswordKeeper.dll
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\bin\Debug\Newtonsoft.Json.dll
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\bin\Debug\PasswordKeeper.pdb
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\bin\Debug\Newtonsoft.Json.xml
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\obj\Debug\TestConsole.csprojResolveAssemblyReference.cache
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\obj\Debug\TestConsole.exe
+E:\Git Source\PasswordKeeper-swift\donet\TestConsole\obj\Debug\TestConsole.pdb
+E:\Git Source\PasswordKeeper-swift\donet\bin\TestConsole.exe.config

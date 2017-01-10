@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace BackDoorWebApi
 {
@@ -21,15 +22,13 @@ namespace BackDoorWebApi
         {
             string line;
             var dataInfo = new List<DataInfo>();
-            var sr = new StreamReader("DataInfoFile.txt", Encoding.Default);
-
+            var sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "DataInfoFile.txt", Encoding.Default);
             while ((line = sr.ReadLine()) != null)
             {
-                dataInfo.Add(new DataInfo
-                {
-                    Key = "0"
-                });
-                //dataInfo.Add(JsonUtils.DeserializeObject<DataInfo>(line));
+                var settings = new JsonSerializerSettings {
+                    ContractResolver = new DefaultContractResolver()
+                };
+                dataInfo.Add(JsonConvert.DeserializeObject<DataInfo>(line, settings));
             }
             return dataInfo;
         }

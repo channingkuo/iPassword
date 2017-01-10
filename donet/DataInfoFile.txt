@@ -1,4 +1,0 @@
-{"caption":"Git1","account":"111","password":"1111","lconName":"default.png","lastEditTime":"2017-01-09 21:50:12","remark":"test","key":"86DD55DC-13A8-4B02-A001-520566553C12","indexKey":"1"}
-{"caption":"Git2","account":"111","password":"1111","lconName":"default.png","lastEditTime":"2017-01-09 22:50:12","remark":"test","key":"86DD55DC-13A8-4B02-A001-520566553C13","indexKey":"1"}
-{"caption":"Git3","account":"111","password":"1111","lconName":"default.png","lastEditTime":"2017-01-09 23:50:12","remark":"test","key":"86DD55DC-13A8-4B02-A001-520566553C14","indexKey":"1"}
-{"caption":"Git4","account":"111","password":"1111","lconName":"default.png","lastEditTime":"2017-01-09 00:50:12","remark":"test","key":"86DD55DC-13A8-4B02-A001-520566553C15","indexKey":"1"}

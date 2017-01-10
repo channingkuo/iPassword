@@ -40,3 +40,5 @@ donet/PasswordKeeper/.vs/*
 donet/PasswordKeeper/obj/*
 donet/PasswordKeeper.WebApi/obj/*
 donet/TestConsole/obj/*
+donet/BackDoorWebApi/bin/*
+donet/BackDoorWebApi/obj/*

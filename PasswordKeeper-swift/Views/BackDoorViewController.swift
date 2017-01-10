@@ -9,12 +9,15 @@
 import UIKit
 import Alamofire
 
-class BackDoorViewController: UIViewController {
+class BackDoorViewController: UITableViewController {
+    
+    var backDoorData: Any?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "BackDoor"
+        self.tableView.tableFooterView = UIView()
         view.backgroundColor = UIColor.init(colorLiteralRed: 255, green: 255, blue: 255, alpha: 1)
         
         // 开启后门
@@ -30,7 +33,7 @@ class BackDoorViewController: UIViewController {
         inputAlert.addTextField(configurationHandler: {(serverAddress: UITextField!) in
             serverAddress.placeholder = "Server Address"
             serverAddress.keyboardType = UIKeyboardType.URL
-            serverAddress.text = "http://wx.rektec.com.cn:28080/"
+            serverAddress.text = "http://192.168.0.110:1222/"
         })
         let actionOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { action in
             // 添加菊花
@@ -41,24 +44,14 @@ class BackDoorViewController: UIViewController {
             activityIndicator.startAnimating()
             
             serverAddress = (inputAlert.textFields?[0].text)!
-            let headers: HTTPHeaders = [
-                "Authorization": "Basic eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYXBwaWQiOiJYY3JtIn0..y9zgR5dYviP3Ppgg_j7l6Q.HLKeT2nAc51upvcCdL0mO-dM3Fgc7cjQ6rm35F19RJVLY-paGLo43b7e9qpQ6Aiop2MiZsd6LAOM5FsCJjx9MQWLtpQ6Z68lxtxTPnZlPS9rJ40lbaeD-v2AjwtGq3-IG5EWPB6rZdzdrtkmYb9CxldQsBgAtgZcZaVOLmiG88gM_eO7ZtSRHz4sWEjJusPN.av6Eoh6x6JErWuwh10Jk4w",
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            ]
-            let parameters: Parameters = ["syncTime": "2016-11-09 11:27:19"]
-            let url = serverAddress + "api/Common/GetWeChatMenu?syncTime="
-            Alamofire.request(url, method: .get, parameters: parameters, headers: headers).responseJSON(completionHandler: {
+            let url = serverAddress + "api/BackDoor/OpenBackDoor"
+            Alamofire.request(url, method: .get).responseJSON(completionHandler: {
                 response in
                 // 去掉菊花
                 activityIndicator.stopAnimating()
                 
-                print(response.request ?? "")
-                print(response.response ?? "")
-                print(response.data ?? "")
-                print(response.result)
-                
                 if let JSON = response.result.value {
+                    self.backDoorData = JSON
                     print("JSON: \(JSON)")
                 }
             })
@@ -70,5 +63,51 @@ class BackDoorViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (self.backDoorData as! [BackDoorModel]).count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        if (self.backDoorData as! [BackDoorModel]).count < indexPath.row {
+            return UITableViewCell()
+        }
+        let info = (self.backDoorData as! [BackDoorModel])[indexPath.row]
+        let cellIdentifier = info.key
+        
+//        if infoInTableRows.count < indexPath.row {
+//            return UITableViewCell()
+//        }
+//        let info = infoInTableRows[indexPath.row]
+//        let cellIdentifier = info["key"] as? String
+//        let cell: TableViewCell = TableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier) as UITableViewCell as! TableViewCell
+//        cell.updateUIInformation(info: info)
+//        return cell
+        return UITableViewCell()
+    }
+    
+    // 选择row，触发出现全选
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    class BackDoorModel {
+        var caption: String?
+        var account: String?
+        var password: String?
+        var iconName: String?
+        var lastEditTime: NSDate?
+        var remark: String?
+        var key: String?
+        var indexKey: String?
     }
 }

@@ -53,12 +53,6 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RekTec.Corelib">
-      <HintPath>..\lib\RekTec.Corelib.dll</HintPath>
-    </Reference>
-    <Reference Include="RekTec.Xrm">
-      <HintPath>..\lib\RekTec.Xrm.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />

@@ -8,10 +8,13 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class BackDoorViewController: UITableViewController {
     
-    var backDoorData: Any?
+    var backDoorData: JSON = []
+    var numOfRow: Int = 0
+    var loadingText: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +36,22 @@ class BackDoorViewController: UITableViewController {
         inputAlert.addTextField(configurationHandler: {(serverAddress: UITextField!) in
             serverAddress.placeholder = "Server Address"
             serverAddress.keyboardType = UIKeyboardType.URL
-            serverAddress.text = "http://192.168.0.110:1222/"
+            //serverAddress.text = "http://192.168.0.110:1222/"
+            serverAddress.text = "http://192.168.1.86:9990/"
         })
         let actionOK = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { action in
             // 添加菊花
-            let activityIndicator = UIActivityIndicatorView.init(frame: CGRect(x: self.view.bounds.width / 2, y: self.view.bounds.height / 2, width: 10, height: 10))
+            let activityIndicator = UIActivityIndicatorView.init(frame: CGRect(x: self.view.bounds.width / 2, y: self.view.bounds.height / 3, width: 10, height: 10))
             activityIndicator.activityIndicatorViewStyle = .gray
             activityIndicator.hidesWhenStopped = true
             self.view.addSubview(activityIndicator)
             activityIndicator.startAnimating()
+            // 添加loading...
+            self.loadingText = UILabel(frame: CGRect(x: 10, y: self.view.bounds.height / 3 + 14, width: self.view.bounds.width, height: 20))
+            self.loadingText?.text = "loading..."
+            self.loadingText?.textAlignment = .center
+            self.view.addSubview(self.loadingText!)
+            
             
             serverAddress = (inputAlert.textFields?[0].text)!
             let url = serverAddress + "api/BackDoor/OpenBackDoor"
@@ -49,10 +59,23 @@ class BackDoorViewController: UITableViewController {
                 response in
                 // 去掉菊花
                 activityIndicator.stopAnimating()
+                // 去掉loading...
+                self.loadingText?.removeFromSuperview()
                 
-                if let JSON = response.result.value {
-                    self.backDoorData = JSON
-                    print("JSON: \(JSON)")
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    self.numOfRow = json.count
+                    self.backDoorData = json
+                    self.tableView.reloadData()
+                    
+                    print(json)
+                    print(json.count)
+                    print(json[0])
+                    print(json[0]["key"])
+                case .failure(let error):
+                    AlertControllerUtils.alertAutoDismission(title: nil, message: "The network connection was lost.", target: self)
+                    print(error)
                 }
             })
         }
@@ -70,44 +93,29 @@ class BackDoorViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.backDoorData as! [BackDoorModel]).count
+        print(self.numOfRow)
+        return self.numOfRow
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
+        return 90
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        if (self.backDoorData as! [BackDoorModel]).count < indexPath.row {
+        if self.backDoorData.count < indexPath.row {
             return UITableViewCell()
         }
-        let info = (self.backDoorData as! [BackDoorModel])[indexPath.row]
-        let cellIdentifier = info.key
+        let info = self.backDoorData[indexPath.row]
+        let cellIdentifier = info["key"].stringValue
         
-//        if infoInTableRows.count < indexPath.row {
-//            return UITableViewCell()
-//        }
-//        let info = infoInTableRows[indexPath.row]
-//        let cellIdentifier = info["key"] as? String
-//        let cell: TableViewCell = TableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier) as UITableViewCell as! TableViewCell
-//        cell.updateUIInformation(info: info)
-//        return cell
-        return UITableViewCell()
+        let cell: BackDoorTableViewCell = BackDoorTableViewCell(style: .default, reuseIdentifier: cellIdentifier) as UITableViewCell as! BackDoorTableViewCell
+        cell.updateUIInformation(info: info)
+        return cell
     }
     
     // 选择row，触发出现全选
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
-    class BackDoorModel {
-        var caption: String?
-        var account: String?
-        var password: String?
-        var iconName: String?
-        var lastEditTime: NSDate?
-        var remark: String?
-        var key: String?
-        var indexKey: String?
+        // TODO
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

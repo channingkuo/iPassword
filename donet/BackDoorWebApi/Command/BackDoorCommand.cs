@@ -45,7 +45,7 @@ namespace BackDoorWebApi
         [JsonProperty("password")]
         public string Password { get; set; }
 
-        [JsonProperty("lconName")]
+        [JsonProperty("iconName")]
         public string IconName { get; set; }
 
         [JsonProperty("lastEditTime")]

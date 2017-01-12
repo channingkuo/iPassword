@@ -58,7 +58,7 @@ class BackDoorTableViewCell : UITableViewCell {
     }
     
     public func updateUIInformation(info: JSON) {
-        iconView.image = UIImage.init(named: info["lconName"].stringValue)
+        iconView.image = UIImage.init(named: info["iconName"].stringValue)
         caption.text = info["caption"].stringValue
         account.text = info["account"].stringValue
         password.text = info["password"].stringValue

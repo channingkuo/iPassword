@@ -11,6 +11,7 @@
 		D72E46501E275194009123AD /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D72E46421E275151009123AD /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D72E46561E275AE4009123AD /* BackDoorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E46551E275AE4009123AD /* BackDoorTableViewCell.swift */; };
 		D7625DA81E0CEAA600B01DE1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */; };
+		D77755771E277E70007637FE /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77755761E277E70007637FE /* ImageUtils.swift */; };
 		D78CBC131E231FEE00E47DB8 /* DateTimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CBC111E231FEE00E47DB8 /* DateTimeUtils.swift */; };
 		D78CBC141E231FEE00E47DB8 /* SQliteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CBC121E231FEE00E47DB8 /* SQliteRepository.swift */; };
 		D78CBC191E23201600E47DB8 /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78CBC161E23201600E47DB8 /* SQLiteDB.swift */; };
@@ -82,6 +83,7 @@
 		D72E46551E275AE4009123AD /* BackDoorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackDoorTableViewCell.swift; path = "PasswordKeeper-swift/Views/BackDoorTableViewCell.swift"; sourceTree = "<group>"; };
 		D744D66D1E076BD700750584 /* PasswordKeeper-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PasswordKeeper-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7625DA71E0CEAA600B01DE1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D77755761E277E70007637FE /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageUtils.swift; path = "PasswordKeeper-swift/Utils/ImageUtils.swift"; sourceTree = "<group>"; };
 		D78CBC111E231FEE00E47DB8 /* DateTimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTimeUtils.swift; path = "PasswordKeeper-swift/Utils/DateTimeUtils.swift"; sourceTree = "<group>"; };
 		D78CBC121E231FEE00E47DB8 /* SQliteRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQliteRepository.swift; path = "PasswordKeeper-swift/Utils/SQliteRepository.swift"; sourceTree = "<group>"; };
 		D78CBC151E23201600E47DB8 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "PasswordKeeper-swift/SQliteDB/Bridging-Header.h"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				D78CBC2F1E2329E500E47DB8 /* AlertControllerUtils.swift */,
 				D78CBC111E231FEE00E47DB8 /* DateTimeUtils.swift */,
 				D78CBC121E231FEE00E47DB8 /* SQliteRepository.swift */,
+				D77755761E277E70007637FE /* ImageUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				D78CBC2C1E2321F100E47DB8 /* NSDateExtension.swift in Sources */,
 				D78CBC221E23203B00E47DB8 /* HomeViewController.swift in Sources */,
 				D78CBC1A1E23201600E47DB8 /* SQLTable.swift in Sources */,
+				D77755771E277E70007637FE /* ImageUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

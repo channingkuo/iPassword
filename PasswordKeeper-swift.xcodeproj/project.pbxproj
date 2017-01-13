@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D71265DD1E2876E3002CB2F3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78CBC4E1E234A7900E47DB8 /* Alamofire.framework */; };
+		D71265DE1E2876EA002CB2F3 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D78CBC4E1E234A7900E47DB8 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D72E464F1E275194009123AD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E46421E275151009123AD /* SwiftyJSON.framework */; };
 		D72E46501E275194009123AD /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D72E46421E275151009123AD /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D72E46561E275AE4009123AD /* BackDoorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E46551E275AE4009123AD /* BackDoorTableViewCell.swift */; };
@@ -71,6 +73,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D71265DE1E2876EA002CB2F3 /* Alamofire.framework in Embed Frameworks */,
 				D72E46501E275194009123AD /* SwiftyJSON.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -112,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D71265DD1E2876E3002CB2F3 /* Alamofire.framework in Frameworks */,
 				D72E464F1E275194009123AD /* SwiftyJSON.framework in Frameworks */,
 				D7625DA81E0CEAA600B01DE1 /* libsqlite3.tbd in Frameworks */,
 			);

@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+// 图片处理相关帮助类
+class ImageUtils {
+    // 1、图片转base64
+    // 2、base64转图片
+    // 3、图片压缩
+}

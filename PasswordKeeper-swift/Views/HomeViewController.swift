@@ -31,8 +31,8 @@ class HomeViewController: UITableViewController {
         navigationItem.backBarButtonItem = item;
         
         // 添加后门
-        //let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(_: )))
-        let pinchGesture = UITapGestureRecognizer(target: self, action: #selector(pinchAction(_: )))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(_: )))
+        //let pinchGesture = UITapGestureRecognizer(target: self, action: #selector(pinchAction(_: )))
         view.addGestureRecognizer(pinchGesture)
     }
     
@@ -126,6 +126,7 @@ class HomeViewController: UITableViewController {
         for (index, value) in infoInTableRows.enumerated() {
             if value["key"] as? String == info["key"] as? String {
                 self.infoInTableRows.remove(at: index)
+                break
             }
         }
         

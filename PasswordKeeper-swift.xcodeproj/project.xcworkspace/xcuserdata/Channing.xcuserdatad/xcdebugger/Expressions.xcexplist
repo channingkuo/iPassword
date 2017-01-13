@@ -14,10 +14,18 @@
          contextName = "TransitViewController.viewDidLoad() -&gt; ():TransitViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "BackDoorViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():BackDoorViewController.swift">
+         contextName = "BackDoorTableViewCell.updateUIInformation(info : JSON) -&gt; ():BackDoorTableViewCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "selectedItem">
+               value = "info[&quot;iconName&quot;].stringValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BackDoorViewController.openBackDoor() -&gt; ():BackDoorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isAllSelected">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -25,7 +33,10 @@
          contextName = "HomeViewController.tableView(UITableView, commit : UITableViewCellEditingStyle, forRowAt : IndexPath) -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "infos.count">
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "infoInTableRows.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -41,6 +52,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "BackDoorViewController.pinchWith2FingersAction(UIPinchGestureRecognizer) -&gt; ():BackDoorViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "static SQliteRepository.delete(tableName : String, columns : [ColumnType]) -&gt; Int32:SQliteRepository.swift">
          <PersistentStrings>
             <PersistentString
@@ -49,10 +63,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "BackDoorTableViewCell.updateUIInformation(info : JSON) -&gt; ():BackDoorTableViewCell.swift">
+         contextName = "BackDoorViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():BackDoorViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "info[&quot;iconName&quot;].stringValue">
+               value = "selectedItem">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

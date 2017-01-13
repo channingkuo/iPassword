@@ -143,7 +143,7 @@ class ReadWriteViewContrller: UIViewController {
             return
         }
         
-        //TODO 数据存入SQlite
+        // 数据存入SQlite
         var info = [ColumnType]()
         let col0 = ColumnType(colName: "dataInfoTableId", colType: nil, colValue: dataInfoKey)
         let col1 = ColumnType(colName: "caption", colType: nil, colValue: caption?.text)

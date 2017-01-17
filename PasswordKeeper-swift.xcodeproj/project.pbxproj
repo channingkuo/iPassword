@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D71265DD1E2876E3002CB2F3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78CBC4E1E234A7900E47DB8 /* Alamofire.framework */; };
 		D71265DE1E2876EA002CB2F3 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D78CBC4E1E234A7900E47DB8 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D71773311E2DB832007049C6 /* TouchIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71773301E2DB832007049C6 /* TouchIDUtils.swift */; };
 		D72E464F1E275194009123AD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72E46421E275151009123AD /* SwiftyJSON.framework */; };
 		D72E46501E275194009123AD /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D72E46421E275151009123AD /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D72E46561E275AE4009123AD /* BackDoorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E46551E275AE4009123AD /* BackDoorTableViewCell.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D71773301E2DB832007049C6 /* TouchIDUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDUtils.swift; path = "PasswordKeeper-swift/Utils/TouchIDUtils.swift"; sourceTree = "<group>"; };
 		D72E46371E275151009123AD /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 		D72E46551E275AE4009123AD /* BackDoorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackDoorTableViewCell.swift; path = "PasswordKeeper-swift/Views/BackDoorTableViewCell.swift"; sourceTree = "<group>"; };
 		D744D66D1E076BD700750584 /* PasswordKeeper-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PasswordKeeper-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +234,7 @@
 				D78CBC111E231FEE00E47DB8 /* DateTimeUtils.swift */,
 				D78CBC121E231FEE00E47DB8 /* SQliteRepository.swift */,
 				D77755761E277E70007637FE /* ImageUtils.swift */,
+				D71773301E2DB832007049C6 /* TouchIDUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				D78CBC301E2329E500E47DB8 /* AlertControllerUtils.swift in Sources */,
 				D78CBC251E23203B00E47DB8 /* TransitViewController.swift in Sources */,
 				D78CBC231E23203B00E47DB8 /* ReadWriteViewController.swift in Sources */,
+				D71773311E2DB832007049C6 /* TouchIDUtils.swift in Sources */,
 				D78CBC2E1E2322B000E47DB8 /* NSObjectExtension.swift in Sources */,
 				D78CBC5E1E234DD400E47DB8 /* BackDoorViewController.swift in Sources */,
 				D72E46561E275AE4009123AD /* BackDoorTableViewCell.swift in Sources */,

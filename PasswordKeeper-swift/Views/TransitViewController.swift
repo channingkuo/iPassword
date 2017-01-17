@@ -13,8 +13,16 @@ class TransitViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //TODO 验证TouchID
-        navigationController?.pushViewController(HomeViewController(), animated: true)
+        // 验证TouchID
+        TouchIdUtils.figerprintAuthentication(callBack: {
+            resp in
+            if resp.isAuthenticated {
+                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            }
+            else{
+                AlertControllerUtils.alertAutoDismission(title: nil, message: resp.errorMsg, target: self)
+            }
+        })
     }
     
     override func viewDidLoad() {

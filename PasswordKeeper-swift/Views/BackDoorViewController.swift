@@ -42,6 +42,7 @@ class BackDoorViewController: UITableViewController {
         self.tableView!.addGestureRecognizer(longPress)
         
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchWith2FingersAction(_: )))
+        //let pinchGesture = UITapGestureRecognizer(target: self, action: #selector(pinchWith2FingersAction(_: )))
         self.tableView!.addGestureRecognizer(pinchGesture)
     }
     
@@ -65,7 +66,7 @@ class BackDoorViewController: UITableViewController {
                 col2.colValue = self.backDoorData[index]["account"].stringValue
                 col3.colValue = self.backDoorData[index]["password"].stringValue
                 col4.colValue = self.backDoorData[index]["iconName"].stringValue
-                col5.colValue = self.backDoorData[index]["lastEditTime"]
+                col5.colValue = DateTimeUtils.dateFromString(dateString: self.backDoorData[index]["lastEditTime"].stringValue)
                 col6.colValue = self.backDoorData[index]["remark"].stringValue
                 col7.colValue = self.backDoorData[index]["key"].stringValue
                 col8.colValue = self.backDoorData[index]["indexKey"].stringValue
@@ -116,7 +117,7 @@ class BackDoorViewController: UITableViewController {
             if !self.isAllSelected {
                 for i in 0 ..< self.numOfRow {
                     let indexPath = NSIndexPath.init(row: i, section: 0)
-                    // TODO 判断是否已经被选择
+                    // 判断是否已经被选择
                     if !checkExist(index: i) {
                         self.tableView.selectRow(at: indexPath as IndexPath, animated: true, scrollPosition: .top)
                         self.selectedItem.append(i)

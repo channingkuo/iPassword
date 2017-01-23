@@ -3,6 +3,17 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "BackDoorViewController.openBackDoor() -&gt; ():BackDoorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isAllSelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TransitViewController.viewDidLoad() -&gt; ():TransitViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "ReadWriteViewContrller.viewWillAppear(Bool) -&gt; ():ReadWriteViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,21 +22,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TransitViewController.viewDidLoad() -&gt; ():TransitViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "BackDoorTableViewCell.updateUIInformation(info : JSON) -&gt; ():BackDoorTableViewCell.swift">
+         contextName = "BackDoorViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():BackDoorViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "info[&quot;iconName&quot;].stringValue">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "BackDoorViewController.openBackDoor() -&gt; ():BackDoorViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "isAllSelected">
+               value = "selectedItem">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -53,6 +53,11 @@
       </ContextState>
       <ContextState
          contextName = "BackDoorViewController.pinchWith2FingersAction(UIPinchGestureRecognizer) -&gt; ():BackDoorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "infos[0][0].colValue">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "static SQliteRepository.delete(tableName : String, columns : [ColumnType]) -&gt; Int32:SQliteRepository.swift">
@@ -63,10 +68,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "BackDoorViewController.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():BackDoorViewController.swift">
+         contextName = "BackDoorTableViewCell.updateUIInformation(info : JSON) -&gt; ():BackDoorTableViewCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "selectedItem">
+               value = "info[&quot;iconName&quot;].stringValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

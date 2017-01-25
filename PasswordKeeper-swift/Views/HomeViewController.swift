@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import LocalAuthentication
 
 class HomeViewController: UITableViewController {
     
@@ -17,9 +18,37 @@ class HomeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "PasswordKeeper"
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.hidesBackButton = true
+        let backgroundView = UIView.init(frame: self.view.bounds)
+        backgroundView.backgroundColor = UIColor.init(white: 0.1, alpha: 0.95)
+        view.addSubview(backgroundView)
+        
+        // 验证TouchID
+        let context = LAContext()
+        context.localizedFallbackTitle = ""
+        var error: NSError?
+        var errorMsg = ""
+        
+        // 判断设备是否支持指纹解锁
+        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "prove you are me", reply: { (success, error) in
+                if success {
+                    // 回到主线程继续UI更新，不这样处理会有4-5秒的延迟
+                    DispatchQueue.main.async(execute: {
+                        backgroundView.removeFromSuperview()
+                        self.navigationItem.title = "PasswordKeeper"
+                        self.navigationController?.isNavigationBarHidden = false
+                    })
+                }
+                else {
+                    // TODO 重新验证TouchID
+                }
+            })
+        } else {
+            errorMsg = "Device does not support the TouchID"
+            AlertControllerUtils.alertAutoDismission(title: nil, message: errorMsg, target: self)
+        }
+        
+        self.navigationItem.hidesBackButton = true
         // 去掉tableView下面多余空行的分割线
         self.tableView.tableFooterView = UIView()
         
@@ -55,7 +84,6 @@ class HomeViewController: UITableViewController {
         self.isFirstPinched = false
         // 从本地数据库中获取数据
         infoInTableRows = SQliteRepository.getData(tableName: SQliteRepository.PASSWORDINFOTABLE)
-        print(infoInTableRows)
         
         if infoInTableRows.count == 0 {
             let bgView = UILabel(frame: CGRect(x: 0, y: self.tableView.bounds.height / 2, width: self.tableView.bounds.width, height: 20))
@@ -69,11 +97,6 @@ class HomeViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

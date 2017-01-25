@@ -13,6 +13,7 @@ class ReadWriteViewContrller: UIViewController {
     
     let viewTitle: String
     var dataInfoKey: String? = ""
+    var info: [[String: Any]]? = nil
     
     var border1, border2, border3: UILabel?
     var caption, account, password: UITextField?
@@ -27,6 +28,23 @@ class ReadWriteViewContrller: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var previewActionItems: [UIPreviewActionItem] {
+        let duplicate = UIPreviewAction(title: "Copy to clipboard", style: .default) { (action, viewController) -> Void in
+            let readWriteViewController = viewController as! ReadWriteViewContrller
+            let info = readWriteViewController.info!
+            UIPasteboard.general.string = info[info.count - 1]["password"] as? String
+            
+            // TODO Alert无法显示，猜测是view的层次遮挡导致
+            AlertControllerUtils.alertAutoDismission(title: nil, message: "Password has copied to pasteboard", target: viewController)
+        }
+        let delete = UIPreviewAction(title: "Delete", style: .destructive) { (action, viewController) -> Void in
+            print("Deleted!")
+            // TODO Alert无法显示，猜测是view的层次遮挡导致
+            AlertControllerUtils.alertAutoDismission(title: nil, message: "Coming soon!", target: viewController)
+        }
+        return [duplicate, delete]
     }
     
     override func viewDidLoad() {
@@ -168,13 +186,13 @@ class ReadWriteViewContrller: UIViewController {
         // 根据key查询数据，并绑定到控件上
         if dataInfoKey != nil || !(dataInfoKey?.isEmpty)! {
             let sql = "select * from \(SQliteRepository.PASSWORDINFOTABLE) where \(SQliteRepository.PASSWORDINFOTABLE)Id = '\(dataInfoKey!)'"
-            let info = SQliteRepository.sqlExcute(sql: sql)
-            if info.count > 0 {
-                caption?.text = info[info.count - 1]["caption"] as? String
-                account?.text = info[info.count - 1]["account"] as? String
-                password?.text = info[info.count - 1]["password"] as? String
-                remark?.text = info[info.count - 1]["remark"] as? String
-                dataInfoKey = info[info.count - 1]["dataInfoTableId"] as? String
+            info = SQliteRepository.sqlExcute(sql: sql)
+            if info!.count > 0 {
+                caption?.text = info![info!.count - 1]["caption"] as? String
+                account?.text = info![info!.count - 1]["account"] as? String
+                password?.text = info![info!.count - 1]["password"] as? String
+                remark?.text = info![info!.count - 1]["remark"] as? String
+                dataInfoKey = info![info!.count - 1]["dataInfoTableId"] as? String
             }
         }
     }

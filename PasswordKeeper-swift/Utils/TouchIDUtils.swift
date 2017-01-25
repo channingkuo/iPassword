@@ -19,8 +19,11 @@ class TouchIdUtils : NSObject {
         if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedDescription, reply: { (success, error) in
                 if success {
-                    resp.isAuthenticated = true
-                    callBack(resp)
+                    // 回到主线程继续UI更新，不这样处理会有4-5秒的延迟
+                    DispatchQueue.main.async(execute: {
+                        resp.isAuthenticated = true
+                        callBack(resp)
+                    })
                 }
                 else {
                     switch Int32((error as? NSError)!.code) {

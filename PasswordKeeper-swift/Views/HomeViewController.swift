@@ -8,7 +8,6 @@
 
 import UIKit
 import Foundation
-import LocalAuthentication
 
 class HomeViewController: UITableViewController {
     
@@ -23,30 +22,17 @@ class HomeViewController: UITableViewController {
         view.addSubview(backgroundView)
         
         // 验证TouchID
-        let context = LAContext()
-        context.localizedFallbackTitle = ""
-        var error: NSError?
-        var errorMsg = ""
-        
-        // 判断设备是否支持指纹解锁
-        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "prove you are me", reply: { (success, error) in
-                if success {
-                    // 回到主线程继续UI更新，不这样处理会有4-5秒的延迟
-                    DispatchQueue.main.async(execute: {
-                        backgroundView.removeFromSuperview()
-                        self.navigationItem.title = "PasswordKeeper"
-                        self.navigationController?.isNavigationBarHidden = false
-                    })
-                }
-                else {
-                    // TODO 重新验证TouchID
-                }
-            })
-        } else {
-            errorMsg = "Device does not support the TouchID"
-            AlertControllerUtils.alertAutoDismission(title: nil, message: errorMsg, target: self)
-        }
+        TouchIdUtils.figerprintAuthentication(localizedDescription: "prove you are me", callBack: {
+            resp in
+            if resp.isAuthenticated {
+                backgroundView.removeFromSuperview()
+                self.navigationItem.title = "PasswordKeeper"
+                self.navigationController?.isNavigationBarHidden = false
+            }
+            else{
+                AlertControllerUtils.alertAutoDismission(title: nil, message: resp.errorMsg, target: self)
+            }
+        })
         
         self.navigationItem.hidesBackButton = true
         // 去掉tableView下面多余空行的分割线

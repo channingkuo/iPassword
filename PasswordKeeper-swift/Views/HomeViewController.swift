@@ -9,13 +9,45 @@
 import UIKit
 import Foundation
 
-class HomeViewController: UITableViewController {
+class HomeViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     var infoInTableRows = [[String: Any]]()
     var isFirstPinched = false
     
+    // peek
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let indexPath = self.tableView.indexPathForRow(at: location)
+        if indexPath == nil {
+            return nil
+        }
+        
+        let cell = self.tableView.cellForRow(at: indexPath!)
+        if cell == nil {
+            return nil
+        }
+        let info = infoInTableRows[(indexPath?.row)!]
+        let key = info["dataInfoTableId"] as? String
+        let title = info["caption"] as! String
+        
+        // TODO peek出来的view上面导航栏没有显示，特别丑
+        let readWriteViewController = ReadWriteViewContrller(viewTitle: title, dataInfoKey: key)
+        readWriteViewController.preferredContentSize = CGSize.init(width: 0, height: 0)
+        previewingContext.sourceRect = (cell?.frame)!
+        return readWriteViewController
+    }
+    
+    // pop
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 注册peek and pop
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: view)
+        }
         
         let backgroundView = UIView.init(frame: self.view.bounds)
         backgroundView.backgroundColor = UIColor.init(white: 0.1, alpha: 0.95)
@@ -26,7 +58,7 @@ class HomeViewController: UITableViewController {
             resp in
             if resp.isAuthenticated {
                 backgroundView.removeFromSuperview()
-                self.navigationItem.title = "PasswordKeeper"
+                self.navigationItem.title = "iPassword"
                 self.navigationController?.isNavigationBarHidden = false
             }
             else{

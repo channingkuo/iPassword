@@ -25,3 +25,4 @@ donet/TestConsole/obj/*
 donet/BackDoorWebApi/bin/*
 donet/BackDoorWebApi/obj/*
 donet/*.suo
+Carthage/*

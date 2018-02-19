@@ -15,6 +15,7 @@ README.txt
 *.USER
 *.userprefs
 *.USERPREFS
+*.xcuserstate
 *.DS_Store
 */.vs/*
 donet/bin/*

@@ -21,6 +21,7 @@
 		D76032412039991900B042F9 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032392039931A00B042F9 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D76032422039991E00B042F9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; };
 		D76032432039991E00B042F9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D770360E203BFEB000527924 /* UIDeviceExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770360D203BFEB000527924 /* UIDeviceExtention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		D76032372039931700B042F9 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D76032392039931A00B042F9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D760323B2039931C00B042F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D770360D203BFEB000527924 /* UIDeviceExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtention.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				D733CAED2039927100A83D3A /* AppDelegate.swift */,
 				D733CAF12039927100A83D3A /* Main.storyboard */,
 				D733CAEF2039927100A83D3A /* ViewController.swift */,
+				D770360D203BFEB000527924 /* UIDeviceExtention.swift */,
 				D733CAF92039927100A83D3A /* LaunchScreen.storyboard */,
 				D733CAF72039927100A83D3A /* Assets.xcassets */,
 				D733CAFC2039927100A83D3A /* Info.plist */,
@@ -304,6 +307,7 @@
 			files = (
 				D733CAF62039927100A83D3A /* iPassword.xcdatamodeld in Sources */,
 				D733CAF02039927100A83D3A /* ViewController.swift in Sources */,
+				D770360E203BFEB000527924 /* UIDeviceExtention.swift in Sources */,
 				D733CAEE2039927100A83D3A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

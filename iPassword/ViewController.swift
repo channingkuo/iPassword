@@ -8,24 +8,35 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
-    var leb: UILabel?
-
+    var tableview: UITableView?
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    /// NavigationBar向上的偏移量
+    var marginTop: CGFloat = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-//        leb = UILabel(frame: CGRect(x: 10, y: 100, width: 200, height: 60))
-//        leb?.text = "Good Luck!"
-//        self.view.addSubview(leb!)
-//        var perspectiveTransform = CATransform3DIdentity
-//        perspectiveTransform.m34 = -1.0 / 2000.0
-//        perspectiveTransform = CATransform3DRotate(perspectiveTransform, CGFloat.pi, 0, 1, 0)
-//        let rotater = UIViewPropertyAnimator(duration: 1.0, curve: .easeIn){
-//            self.leb!.layer.transform = perspectiveTransform
-//        }
-//        rotater.startAnimation(afterDelay: 5.0)
+        let statusBarView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 20))
+        statusBarView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
+        
+        self.marginTop = self.navigationBar.frame.height + 20
+        if UIDevice.current.deviceName == "iPhone X" || UIDevice.current.deviceName == "Simulator" {
+            self.navigationBar.frame.origin.y = 44
+            self.marginTop = self.navigationBar.frame.height + 44
+            
+            statusBarView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)
+        }
+        
+        self.view.addSubview(statusBarView)
+        self.setNeedsStatusBarAppearanceUpdate()
+        
+        self.tableview = UITableView(frame: CGRect(x: 0, y: self.marginTop, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - self.marginTop), style: .plain)
+        self.tableview?.delegate = self
+        self.tableview?.dataSource = self
+        self.view.addSubview(self.tableview!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,13 +44,54 @@ class ViewController: UIViewController {
         
         self.launchAnumation()
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier")
+        if (cell == nil) {
+            cell = UITableViewCell(style: .default, reuseIdentifier: "cellIdentifier")
+        }
+        cell?.textLabel?.text = String(indexPath.row)
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    /// 滚动试图页面，改变NavigationBar形态、ToolBar等控件
+    ///
+    /// - Parameter scrollView:
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.tableview?.contentOffset.y)! >= CGFloat(44.0) {
+            if #available(iOS 11.0, *) {
+                self.navigationBar.prefersLargeTitles = false
+            } else {
+                // Fallback on earlier versions
+            }
+        } else {
+            if #available(iOS 11.0, *) {
+                self.navigationBar.prefersLargeTitles = true
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    /// 加载自定义启动画面
+    /// load custom launch animation
     func launchAnumation() -> Void {
         let viewController = UIStoryboard.init(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "LaunchScreen")
         let launchView = viewController.view

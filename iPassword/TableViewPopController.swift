@@ -23,20 +23,16 @@ class TableViewPopController: UIViewController {
         self.mainViewController = root
         self.popView = popView
         
-        self.createSubView()
-    }
-    
-    func createSubView() {
         self.view.backgroundColor = .black
         mainViewController!.view.frame = self.view.bounds
         rootView = mainViewController!.view
-        
+    }
+    
 //        self.maskView = UIView(frame: UIScreen.main.bounds)
 //        self.maskView.backgroundColor = .clear
 //        UIApplication.shared.windows[0].addSubview(self.maskView)
 //        let closeGesture = UITapGestureRecognizer(target: self, action: #selector(closeGestureAction(_: )))
 //        self.maskView.addGestureRecognizer(closeGesture)
-    }
     
 //    @objc func closeGestureAction(_ recognizer: UITapGestureRecognizer){
 //        self.pop()
@@ -47,18 +43,13 @@ class TableViewPopController: UIViewController {
         var frame = popView.frame
         frame.origin.y = self.view.bounds.size.height - self.popView.frame.size.height
         
+//        self.rootView.layer.cornerRadius = 8.0
+//        UIApplication.shared.windows[0].layer.cornerRadius = 8.0
+        self.popView.layer.cornerRadius = 8.0
+        
         let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
-            self.rootView.layer.transform = self.firstTransform()
-        }
-        animator.addCompletion { (position) in
-            let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
-                self.rootView.layer.transform = self.secondTransform()
-            }
-            animator.addCompletion { (position) in
-                // popView上升
-                self.popView.frame = frame
-            }
-            animator.startAnimation()
+            self.rootView.layer.transform = self.transformToBack()
+//            self.popView.frame = frame
         }
         animator.startAnimation()
     }
@@ -70,7 +61,7 @@ class TableViewPopController: UIViewController {
         let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
             self.popView.frame = frame
             // 改善滑动效果
-            self.rootView.layer.transform = self.firstTransform()
+            self.rootView.layer.transform = self.transformToBack()
         }
         animator.addCompletion { (position) in
             let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
@@ -85,14 +76,17 @@ class TableViewPopController: UIViewController {
         animator.startAnimation()
     }
     
-    func firstTransform() -> CATransform3D {
-        var t1 = CATransform3DIdentity
-        t1.m34 = 1.0 / -900
-        //带点缩小的效果
-        t1 = CATransform3DScale(t1, 0.95, 0.95, 1)
-        //绕x轴旋转
-        t1 = CATransform3DRotate(t1, 15.0 * CGFloat.pi/180.0, 1, 0, 0)
-        return t1
+    func transformToBack() -> CATransform3D {
+        var transformIdentity = CATransform3DIdentity
+        transformIdentity.m34 = 1.0 / -900
+        // 带点缩小的效果
+        transformIdentity = CATransform3DScale(transformIdentity, 0.98, 1, 1)
+        // 绕x轴旋转
+        transformIdentity = CATransform3DRotate(transformIdentity, 10.0 * CGFloat.pi / 180.0, 1, 0, 0)
+        // 往负z方向平移
+        let offset_z = 1 / 4 * self.view.frame.size.height * sin(10.0 * CGFloat.pi / 180.0)
+        transformIdentity = CATransform3DTranslate(transformIdentity, 0, 0, -offset_z * 2 - 10)
+        return transformIdentity
     }
     
     func secondTransform() -> CATransform3D {

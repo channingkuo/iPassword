@@ -10,8 +10,12 @@ import UIKit
 
 class TableViewController: TableViewPopController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
+    @IBOutlet var tableview: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIApplication.shared.statusBarStyle = .lightContent
         
         /// setup iOS 11 NavigationBar style
         self.navigationItem.title = "iPassword"
@@ -32,7 +36,7 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         } else {
             // Fallback on earlier versions
         }
-        let rightButtonItem = UIBarButtonItem(title: "New", style: UIBarButtonItemStyle.plain, target: self, action: #selector(TableViewController.newone))
+        let rightButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(TableViewController.newone))
         self.navigationItem.setRightBarButton(rightButtonItem, animated: true)
         
         /// setup viewcontroller pop up

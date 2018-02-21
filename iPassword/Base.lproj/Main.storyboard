@@ -33,6 +33,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="c1f-iT-fc0"/>
+                    <connections>
+                        <outlet property="tableview" destination="OiM-Tc-epb" id="IA7-tB-1iz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEA-A3-OLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

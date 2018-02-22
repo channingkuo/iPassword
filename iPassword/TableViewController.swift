@@ -10,7 +10,18 @@ import UIKit
 
 class TableViewController: TableViewPopController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
+    @IBOutlet var panGesture: UIPanGestureRecognizer!
     @IBOutlet var tableview: UITableView!
+    var rightButtonItem = UIBarButtonItem()
+    
+    var topTitleView = UIView(), popedView = UIView()
+    var strightLine = UIView()
+    var cancelButton = UIButton()
+    var saveButton = UIButton()
+    
+    //  popview pushed    editview edit   popview min
+    var isPushed = false, isEdit = false, popMin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +31,7 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         /// setup iOS 11 NavigationBar style
         self.navigationItem.title = "iPassword"
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = {[
             NSAttributedStringKey.foregroundColor: UIColor.white,
             NSAttributedStringKey.font: UIFont(name: "Zapfino", size: 18.0)!
@@ -36,19 +48,10 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         } else {
             // Fallback on earlier versions
         }
-        let rightButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(TableViewController.newone))
-        self.navigationItem.setRightBarButton(rightButtonItem, animated: true)
+        self.rightButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(TableViewController.newone))
+        self.navigationItem.setRightBarButton(self.rightButtonItem, animated: true)
         
-        /// setup viewcontroller pop up
-        let popedView = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 100))
-        popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
-        // setup shadow
-        popedView.layer.shadowColor = UIColor.black.cgColor
-        popedView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        popedView.layer.shadowOpacity = 0.8
-        popedView.layer.shadowRadius = 5
-        
-        self.createPopViewController(self.navigationController!, popView: popedView)
+        self.setupPopView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,9 +101,134 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         
     }
     
-    /// add new
+    /// push the pop view
     @objc func newone() -> Void {
+        self.isPushed = true
+        self.rightButtonItem.isEnabled = false
         self.push()
+    }
+    
+    /// pop the pop view
+    @objc func cancelButton_Clicked() -> Void {
+        self.isPushed = false
+        self.rightButtonItem.isEnabled = true
+        
+        self.pop()
+        
+        self.topTitleView.removeGestureRecognizer(self.tapGesture)
+        self.topTitleView.addGestureRecognizer(self.panGesture)
+    }
+    
+    /// save the password
+    @objc func saveButton_Clicked() -> Void {
+        
+    }
+    
+//    @objc func popThePopedView() -> Void {
+//        if self.isPushed {
+//            self.cancelButton_Clicked()
+//        }
+//    }
+    
+    /// 新增编辑页面的基础设置
+    func setupPopView() -> Void {
+        /// setup viewcontroller pop up
+        self.popedView = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 50))
+        self.popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 0.9)
+        // setup shadow
+        self.popedView.layer.shadowColor = UIColor.black.cgColor
+        self.popedView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        self.popedView.layer.shadowOpacity = 0.8
+        self.popedView.layer.shadowRadius = 5
+        // top title(NavigationBar) view
+        self.topTitleView = UIView(frame: CGRect(x: 0, y: 0, width: self.popedView.frame.width, height: 50))
+        self.topTitleView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
+        self.topTitleView.layer.cornerRadius = 8.0
+        self.popedView.addSubview(self.topTitleView)
+        // pop button
+        self.cancelButton = UIButton(frame: CGRect(x: 10, y: 10, width: 60, height: 30))
+        self.cancelButton.setTitle("Cancel", for: .normal)
+        self.cancelButton.addTarget(self, action: #selector(TableViewController.cancelButton_Clicked), for: .touchUpInside)
+        // save button
+        self.saveButton = UIButton(frame: CGRect(x: self.topTitleView.frame.width - 10 - 60, y: 10, width: 60, height: 30))
+        self.saveButton.setTitle("Save", for: .normal)
+        self.saveButton.setTitleColor(.lightGray, for: .disabled)
+        self.saveButton.setTitleColor(.white, for: .normal)
+        self.saveButton.isEnabled = false
+        self.saveButton.addTarget(self, action: #selector(TableViewController.saveButton_Clicked), for: .touchUpInside)
+        // title view
+        let passwordLabel = UILabel(frame: CGRect(x: 0, y: 15, width: self.topTitleView.frame.width, height: 30))
+        passwordLabel.text = "New Password"
+        passwordLabel.textColor = .white
+        passwordLabel.textAlignment = .center
+        passwordLabel.attributedText = NSAttributedString(string: "New Password", attributes: [NSAttributedStringKey.font: UIFont(name: "Zapfino", size: 14.0)!])
+        // stright line
+        self.strightLine = UIView(frame: CGRect(x: (self.topTitleView.frame.width - 50) / 2, y: 4, width: 50, height: 6))
+        self.strightLine.backgroundColor = UIColor(red: 207 / 255, green: 205 / 255, blue: 209 / 255, alpha: 1)
+        self.strightLine.layer.cornerRadius = 3.0
+        // override bottom corner radius
+        let overrideView = UIView(frame: CGRect(x: 0, y: 40, width: self.topTitleView.frame.width, height: 10))
+        overrideView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
+        self.topTitleView.addSubview(self.cancelButton)
+        self.topTitleView.addSubview(self.saveButton)
+        self.topTitleView.addSubview(passwordLabel)
+        self.topTitleView.addSubview(overrideView)
+        self.topTitleView.addSubview(self.strightLine)
+        
+        self.createPopViewController(self.navigationController!, popView: self.popedView)
+        
+        // setup pan/tap gesture to the view
+        self.tapGesture.addTarget(self, action: #selector(TableViewController.tapGesture_Clicked))
+        self.panGesture.addTarget(self, action: #selector(TableViewController.panGesture_drag))
+        self.topTitleView.addGestureRecognizer(self.panGesture)
+    }
+    
+    /// view pan gesture
+    ///
+    /// - Parameter sender:
+    @objc func panGesture_drag(sender : UIPanGestureRecognizer) {
+        let translation = sender.translation(in: self.view)
+        self.popedView.center = CGPoint(x: self.popedView.center.x , y: self.popedView.center.y + translation.y)
+        self.view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -1.0 * CGFloat.pi / 180.0, 1, 0, 0)
+        sender.setTranslation(CGPoint.zero, in: self.view)
+        
+        if sender.state == .ended {
+            if (self.popedView.frame.origin.y > UIScreen.main.bounds.size.height / 2) && (self.popedView.frame.origin.y != 50) {
+                self.popedView.frame.origin.y = self.view.center.y * 2 - 50
+                // 设置最小化后的编辑页面
+                self.setupFinalSite()
+                // 移除拖拽手势控件
+                self.topTitleView.removeGestureRecognizer(self.panGesture)
+                // 设置最小化后的view的点击事件————还原到编辑状态
+                self.topTitleView.addGestureRecognizer(self.tapGesture)
+                // 隐藏部分按钮
+                self.cancelButton.isHidden = true
+                self.saveButton.isHidden = true
+                self.strightLine.isHidden = true
+                
+                self.popMin = true
+            } else {
+                self.popedView.frame.origin.y = 50
+                self.popMin = false
+            }
+        }
+    }
+    
+    /// view tap gesture
+    ///
+    /// - Parameter sender:
+    @objc func tapGesture_Clicked(sender : UITapGestureRecognizer) {
+        self.topTitleView.removeGestureRecognizer(self.tapGesture)
+        self.topTitleView.addGestureRecognizer(self.panGesture)
+        
+        // 显示部分按钮
+        self.cancelButton.isHidden = false
+        self.saveButton.isHidden = false
+        self.strightLine.isHidden = false
+        
+        self.setupMaximize(minimize: self.popMin)
+        
+        self.popMin = false
     }
     
     override func didReceiveMemoryWarning() {

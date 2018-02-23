@@ -78,22 +78,26 @@ class TableViewPopController: UIViewController {
     
     /// 最小化popview
     func setupFinalSite() {
-        self.rootView.layer.transform = CATransform3DIdentity
-        
-        self.rootView.frame.size.height = UIScreen.main.bounds.height - 50 - 2
+        self.rootView.layer.transform = self.transformToBack()
+        let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
+            // 变为初始值
+            self.rootView.layer.transform = CATransform3DIdentity
+//            self.rootView.frame.size.height = UIScreen.main.bounds.height - 50 - 2
+        }
+        animator.startAnimation()
     }
     
     /// 最大化popview
     func setupMaximize(minimize: Bool) {
         // 恢复rootview的高度
-        self.rootView.frame.size.height = UIScreen.main.bounds.height
+//        self.rootView.frame.size.height = UIScreen.main.bounds.height
         // animation start
-        var popViewFrame = self.popView.frame
-        popViewFrame.origin.y = self.view.bounds.size.height - self.popView.frame.size.height
+//        var popViewFrame = self.popView.frame
+//        popViewFrame.origin.y = self.view.bounds.size.height - self.popView.frame.size.height
         
         let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
             self.rootView.layer.transform = self.transformToBack()
-            self.popView.frame = popViewFrame
+            self.popView.frame.origin.y = 50
         }
         animator.startAnimation()
     }

@@ -189,7 +189,7 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
     @objc func panGesture_drag(sender : UIPanGestureRecognizer) {
         let translation = sender.translation(in: self.view)
         self.popedView.center = CGPoint(x: self.popedView.center.x , y: self.popedView.center.y + translation.y)
-        self.view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -1.0 * CGFloat.pi / 180.0, 1, 0, 0)
+//        self.view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -1.0 * CGFloat.pi / 180.0, 1, 0, 0)
         sender.setTranslation(CGPoint.zero, in: self.view)
         
         if sender.state == .ended {
@@ -197,6 +197,7 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
                 self.popedView.frame.origin.y = self.view.center.y * 2 - 50
                 // 设置最小化后的编辑页面
                 self.setupFinalSite()
+                self.view.frame.size.height -= 50
                 // 移除拖拽手势控件
                 self.topTitleView.removeGestureRecognizer(self.panGesture)
                 // 设置最小化后的view的点击事件————还原到编辑状态
@@ -205,7 +206,6 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
                 self.cancelButton.isHidden = true
                 self.saveButton.isHidden = true
                 self.strightLine.isHidden = true
-                
                 self.popMin = true
             } else {
                 self.popedView.frame.origin.y = 50
@@ -227,6 +227,7 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         self.strightLine.isHidden = false
         
         self.setupMaximize(minimize: self.popMin)
+        self.view.frame.size.height += 50
         
         self.popMin = false
     }

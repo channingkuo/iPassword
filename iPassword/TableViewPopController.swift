@@ -34,14 +34,12 @@ class TableViewPopController: UIViewController {
     /// show the pop view
     func push() {
         UIApplication.shared.windows[0].addSubview(popView)
-        var frame = self.popView.frame
-        frame.origin.y = self.view.bounds.size.height - self.popView.frame.size.height
         
         self.popView.layer.cornerRadius = 8.0
         
         let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
             self.rootView.layer.transform = self.transformToBack()
-            self.popView.frame = frame
+            self.popView.frame.origin.y = 50
         }
         animator.startAnimation()
     }
@@ -82,19 +80,12 @@ class TableViewPopController: UIViewController {
         let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
             // 变为初始值
             self.rootView.layer.transform = CATransform3DIdentity
-//            self.rootView.frame.size.height = UIScreen.main.bounds.height - 50 - 2
         }
         animator.startAnimation()
     }
     
     /// 最大化popview
     func setupMaximize(minimize: Bool) {
-        // 恢复rootview的高度
-//        self.rootView.frame.size.height = UIScreen.main.bounds.height
-        // animation start
-//        var popViewFrame = self.popView.frame
-//        popViewFrame.origin.y = self.view.bounds.size.height - self.popView.frame.size.height
-        
         let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut){
             self.rootView.layer.transform = self.transformToBack()
             self.popView.frame.origin.y = 50

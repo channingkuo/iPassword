@@ -124,17 +124,11 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         
     }
     
-//    @objc func popThePopedView() -> Void {
-//        if self.isPushed {
-//            self.cancelButton_Clicked()
-//        }
-//    }
-    
     /// 新增编辑页面的基础设置
     func setupPopView() -> Void {
         /// setup viewcontroller pop up
         self.popedView = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - 50))
-        self.popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 0.9)
+        self.popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 0.85)
         // setup shadow
         self.popedView.layer.shadowColor = UIColor.black.cgColor
         self.popedView.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
@@ -188,16 +182,28 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
     /// - Parameter sender:
     @objc func panGesture_drag(sender : UIPanGestureRecognizer) {
         let translation = sender.translation(in: self.view)
-        self.popedView.center = CGPoint(x: self.popedView.center.x , y: self.popedView.center.y + translation.y)
+        self.popedView.frame.origin.y += translation.y
+        // TODO 移动过程中self.view的3D旋转动画
 //        self.view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -1.0 * CGFloat.pi / 180.0, 1, 0, 0)
         sender.setTranslation(CGPoint.zero, in: self.view)
         
         if sender.state == .ended {
             if (self.popedView.frame.origin.y > UIScreen.main.bounds.size.height / 2) && (self.popedView.frame.origin.y != 50) {
-                self.popedView.frame.origin.y = self.view.center.y * 2 - 50
+                if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.2") {
+                    self.popedView.frame.origin.y = UIScreen.main.bounds.size.height - 60
+                    self.popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
+                } else {
+                    self.popedView.frame.origin.y = UIScreen.main.bounds.size.height - 50
+                }
                 // 设置最小化后的编辑页面
                 self.setupFinalSite()
-                self.view.frame.size.height -= 50
+                
+                if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.2") {
+                    self.view.frame.size.height -= 62
+                } else {
+                    self.view.frame.size.height -= 52
+                }
+                
                 // 移除拖拽手势控件
                 self.topTitleView.removeGestureRecognizer(self.panGesture)
                 // 设置最小化后的view的点击事件————还原到编辑状态
@@ -221,13 +227,19 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         self.topTitleView.removeGestureRecognizer(self.tapGesture)
         self.topTitleView.addGestureRecognizer(self.panGesture)
         
+        if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.2") {
+            self.view.frame.size.height += 62
+            self.popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 0.85)
+        } else {
+            self.view.frame.size.height += 52
+        }
+        
         // 显示部分按钮
         self.cancelButton.isHidden = false
         self.saveButton.isHidden = false
         self.strightLine.isHidden = false
         
         self.setupMaximize(minimize: self.popMin)
-        self.view.frame.size.height += 50
         
         self.popMin = false
     }

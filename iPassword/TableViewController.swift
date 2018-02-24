@@ -113,6 +113,8 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         self.isPushed = false
         self.rightButtonItem.isEnabled = true
         
+        self.view.layer.cornerRadius = 0.0
+        
         self.pop()
         
         self.topTitleView.removeGestureRecognizer(self.tapGesture)
@@ -184,7 +186,6 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         let translation = sender.translation(in: self.view)
         self.popedView.frame.origin.y += translation.y
         // TODO 移动过程中self.view的3D旋转动画
-//        self.view.layer.transform = CATransform3DRotate(CATransform3DIdentity, -1.0 * CGFloat.pi / 180.0, 1, 0, 0)
         sender.setTranslation(CGPoint.zero, in: self.view)
         
         if sender.state == .ended {
@@ -203,6 +204,7 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
                 } else {
                     self.view.frame.size.height -= 52
                 }
+                self.view.layer.cornerRadius = 8.0
                 
                 // 移除拖拽手势控件
                 self.topTitleView.removeGestureRecognizer(self.panGesture)

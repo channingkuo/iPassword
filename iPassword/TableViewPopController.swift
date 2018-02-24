@@ -70,7 +70,8 @@ class TableViewPopController: UIViewController {
         var transformIdentity = CATransform3DIdentity
         transformIdentity.m34 = -1.0 / 1000
         // 绕x轴反向旋转
-        transformIdentity = CATransform3DRotate(transformIdentity, -5.0 * CGFloat.pi / 180.0, 1, 0, 0)
+        let degrees = -5.0 * CGFloat.pi / 180.0 * offsetHeight / self.popView.frame.size.height
+        transformIdentity = CATransform3DRotate(CATransform3DIdentity, degrees, 1, 0, 0)
         self.rootView.layer.transform = transformIdentity
     }
     

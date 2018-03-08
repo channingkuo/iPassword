@@ -28,6 +28,18 @@ class TableViewController: TableViewPopController, UITableViewDelegate, UITableV
         
         UIApplication.shared.statusBarStyle = .lightContent
         
+        self.navigationController?.view.layer.cornerRadius = 10
+        self.navigationController?.view.layer.masksToBounds = true
+//        if #available(iOS 11.0, *) {
+//            self.tableview.contentInsetAdjustmentBehavior = .never
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        self.tableview.backgroundColor = .white
+//        self.tableview.estimatedRowHeight = 0
+//        self.tableview.estimatedSectionFooterHeight = 0
+//        self.tableview.estimatedSectionHeaderHeight = 0
+        
         /// setup iOS 11 NavigationBar style
         self.navigationItem.title = "iPassword"
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)

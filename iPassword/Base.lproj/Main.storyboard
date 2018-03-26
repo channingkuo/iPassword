@@ -34,16 +34,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="c1f-iT-fc0"/>
                     <connections>
-                        <outlet property="panGesture" destination="bnr-gf-z3D" id="ZJ3-Jx-Ett"/>
                         <outlet property="tableview" destination="OiM-Tc-epb" id="IA7-tB-1iz"/>
-                        <outlet property="tapGesture" destination="Nf7-aE-hqE" id="gu5-6H-RKq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEA-A3-OLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="bnr-gf-z3D"/>
-                <tapGestureRecognizer id="Nf7-aE-hqE"/>
             </objects>
-            <point key="canvasLocation" x="775" y="797"/>
+            <point key="canvasLocation" x="799" y="797"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aAd-RJ-URk">

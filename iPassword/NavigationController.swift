@@ -9,6 +9,7 @@
 import UIKit
 
 class NavigationController: UINavigationController {
+    var isFirstAppear: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,9 @@ class NavigationController: UINavigationController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.launchAnumation()
+        if isFirstAppear {
+            self.launchAnumation()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,7 +37,7 @@ class NavigationController: UINavigationController {
         let viewController = UIStoryboard.init(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "LaunchScreen")
         let launchView = viewController.view
         let mainWindow = UIApplication.shared.keyWindow
-        launchView?.frame = (UIApplication.shared.keyWindow?.frame)!
+        launchView?.frame = self.view.frame//(UIApplication.shared.keyWindow?.frame)!
         mainWindow?.addSubview(launchView!)
         
         // icon animation
@@ -63,6 +66,7 @@ class NavigationController: UINavigationController {
         }
         animator.addCompletion { (position) in
             launchView?.removeFromSuperview()
+            self.isFirstAppear = false
         }
         animator.startAnimation(afterDelay: 3.0)
     }

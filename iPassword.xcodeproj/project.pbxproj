@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D71732D32060FF58000BD1CD /* KInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71732D22060FF58000BD1CD /* KInteractiveTransition.swift */; };
 		D733CAEE2039927100A83D3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D733CAED2039927100A83D3A /* AppDelegate.swift */; };
 		D733CAF32039927100A83D3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D733CAF12039927100A83D3A /* Main.storyboard */; };
 		D733CAF62039927100A83D3A /* iPassword.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D733CAF42039927100A83D3A /* iPassword.xcdatamodeld */; };
@@ -20,10 +21,12 @@
 		D76032412039991900B042F9 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032392039931A00B042F9 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D76032422039991E00B042F9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; };
 		D76032432039991E00B042F9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D76996B72062594500164FD8 /* KPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76996B62062594500164FD8 /* KPresentTransition.swift */; };
 		D770360E203BFEB000527924 /* UIDeviceExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770360D203BFEB000527924 /* UIDeviceExtention.swift */; };
+		D79CFC082067BB3500982571 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79CFC072067BB3500982571 /* ComposeViewController.swift */; };
+		D79CFC0A2067C01600982571 /* RowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79CFC092067C01600982571 /* RowTableViewCell.swift */; };
 		D79E18E2203C43AF00691180 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79E18E1203C43AF00691180 /* NavigationController.swift */; };
 		D79E18E4203C43D800691180 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79E18E3203C43D800691180 /* TableViewController.swift */; };
-		D79E18E6203C6B5500691180 /* TableViewPopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79E18E5203C6B5500691180 /* TableViewPopController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D71732D22060FF58000BD1CD /* KInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KInteractiveTransition.swift; sourceTree = "<group>"; };
 		D733CAEA2039927100A83D3A /* iPassword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPassword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D733CAED2039927100A83D3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D733CAF22039927100A83D3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,10 +80,12 @@
 		D76032372039931700B042F9 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D76032392039931A00B042F9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D760323B2039931C00B042F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D76996B62062594500164FD8 /* KPresentTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPresentTransition.swift; sourceTree = "<group>"; };
 		D770360D203BFEB000527924 /* UIDeviceExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtention.swift; sourceTree = "<group>"; };
+		D79CFC072067BB3500982571 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		D79CFC092067C01600982571 /* RowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTableViewCell.swift; sourceTree = "<group>"; };
 		D79E18E1203C43AF00691180 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D79E18E3203C43D800691180 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		D79E18E5203C6B5500691180 /* TableViewPopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewPopController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,8 +144,11 @@
 				D733CAF12039927100A83D3A /* Main.storyboard */,
 				D79E18E1203C43AF00691180 /* NavigationController.swift */,
 				D79E18E3203C43D800691180 /* TableViewController.swift */,
-				D79E18E5203C6B5500691180 /* TableViewPopController.swift */,
+				D79CFC092067C01600982571 /* RowTableViewCell.swift */,
+				D79CFC072067BB3500982571 /* ComposeViewController.swift */,
 				D770360D203BFEB000527924 /* UIDeviceExtention.swift */,
+				D71732D22060FF58000BD1CD /* KInteractiveTransition.swift */,
+				D76996B62062594500164FD8 /* KPresentTransition.swift */,
 				D733CAF92039927100A83D3A /* LaunchScreen.storyboard */,
 				D733CAF72039927100A83D3A /* Assets.xcassets */,
 				D733CAFC2039927100A83D3A /* Info.plist */,
@@ -311,12 +320,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D79CFC082067BB3500982571 /* ComposeViewController.swift in Sources */,
+				D71732D32060FF58000BD1CD /* KInteractiveTransition.swift in Sources */,
 				D733CAF62039927100A83D3A /* iPassword.xcdatamodeld in Sources */,
+				D76996B72062594500164FD8 /* KPresentTransition.swift in Sources */,
 				D79E18E4203C43D800691180 /* TableViewController.swift in Sources */,
 				D79E18E2203C43AF00691180 /* NavigationController.swift in Sources */,
+				D79CFC0A2067C01600982571 /* RowTableViewCell.swift in Sources */,
 				D770360E203BFEB000527924 /* UIDeviceExtention.swift in Sources */,
 				D733CAEE2039927100A83D3A /* AppDelegate.swift in Sources */,
-				D79E18E6203C6B5500691180 /* TableViewPopController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

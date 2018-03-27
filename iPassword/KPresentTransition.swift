@@ -16,19 +16,30 @@ enum KPresentOneTransitionType: Int64 {
     KPresentOneTransitionTypeDismiss
 }
 
+
+/// 是通过点击按钮触发还是通过手势触发
+///
+/// - KPresentOneTransitionClick:
+enum KPresentOneTransitionClickOrGesture: Int64 {
+    case KPresentOneTransitionClick = 0,
+    KPresentOneTransitionGesture
+}
+
 class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
     var type: KPresentOneTransitionType?
+    var invokeMethod: KPresentOneTransitionClickOrGesture?
     
-    required init(type: KPresentOneTransitionType) {
+    required init(type: KPresentOneTransitionType, invokeMethod: KPresentOneTransitionClickOrGesture) {
         self.type = type
+        self.invokeMethod = invokeMethod
     }
     
-    class func transitionWithTransitionType(type: KPresentOneTransitionType) -> KPresentTransition {
-        return self.init(type: type)
+    class func transitionWithTransitionType(type: KPresentOneTransitionType, invokeMethod: KPresentOneTransitionClickOrGesture) -> KPresentTransition {
+        return self.init(type: type, invokeMethod: invokeMethod)
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return self.type == .KPresentOneTransitionTypePresent ? 0.5 : 0.25
+        return 0.2
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -71,15 +82,14 @@ class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
         
         // 设置fromVc的frame，因为这里toVc present出来不是全屏，且初始的时候在底部，如果不设置frame的话默认就是整个屏幕，
         // 这里containerView的frame就是整个屏幕
-        toVc?.view.frame = CGRect(x: 0, y: containerView.frame.height, width: containerView.frame.width, height: containerView.frame.height - 400)
+        toVc?.view.frame = CGRect(x: 0, y: containerView.frame.height, width: containerView.frame.width, height: containerView.frame.height - 50)
         
-        // 开始动画，使用产生弹簧效果的动画api
-        UIView.animate(withDuration: self.transitionDuration(using: transitionContext), delay: 0, usingSpringWithDamping: 0.55, initialSpringVelocity: 1.0 / 0.55, options: UIViewAnimationOptions.init(rawValue: 0), animations: {
-            toVc?.view.transform = CGAffineTransform.init(translationX: 0, y: 400 - containerView.frame.height)
-            tempView?.transform = CGAffineTransform.init(scaleX: 0.85, y: 0.85)
+        // 开始动画
+        UIView.animate(withDuration: self.transitionDuration(using: transitionContext), delay: 0, options: .curveLinear, animations: {
+            toVc?.view.transform = CGAffineTransform.init(translationX: 0, y: 50 - containerView.frame.height)
+            tempView?.transform = CGAffineTransform.init(scaleX: 0.9, y: 0.9)
         }, completion: {
             finished in
-            
             if transitionContext.transitionWasCancelled {
                 transitionContext.completeTransition(false)
                 fromVc?.view.isHidden = false
@@ -94,27 +104,53 @@ class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
     ///
     /// - Parameter transitionContext:
     func dismissAnimation(transitionContext: UIViewControllerContextTransitioning) -> Void {
-//        注意在dismiss的时候fromVC就是vc2了，toVC才是VC1了
-        let fromVc = transitionContext.viewController(forKey: .from)
-        let toVc = transitionContext.viewController(forKey: .to)
-        // 参照present动画的逻辑，present成功后，containerView的最后一个子视图就是截图视图，将其取出准备动画
-        let containerView = transitionContext.containerView
-        let subViewsArray = containerView.subviews
-        let tempView = subViewsArray[min(subViewsArray.count, max(0, subViewsArray.count - 2))]
-        // 动画
-        UIView.animate(withDuration: self.transitionDuration(using: transitionContext), animations: {
-            fromVc?.view.transform = CGAffineTransform.identity
-            tempView.transform = CGAffineTransform.identity
-        }, completion: {
-            finished in
-            
-            if transitionContext.transitionWasCancelled {
-                transitionContext.completeTransition(false)
-            } else {
-                transitionContext.completeTransition(true)
-                toVc?.view.isHidden = false
-                tempView.removeFromSuperview()
-            }
-        })
+        // 点击取消按钮，关闭presented view
+        if self.invokeMethod == .KPresentOneTransitionClick {
+            let fromVc = transitionContext.viewController(forKey: .from)
+            let toVc = transitionContext.viewController(forKey: .to)
+            // 参照present动画的逻辑，present成功后，containerView的最后一个子视图就是截图视图，将其取出准备动画
+            let containerView = transitionContext.containerView
+            let subViewsArray = containerView.subviews
+            let tempView = subViewsArray[min(subViewsArray.count, max(0, subViewsArray.count - 2))]
+            // 动画
+            UIView.animate(withDuration: self.transitionDuration(using: transitionContext), delay: 0, options: .curveLinear, animations: {
+                fromVc?.view.transform = CGAffineTransform.identity
+                tempView.transform = CGAffineTransform.identity
+            }, completion: {
+                finished in
+                if transitionContext.transitionWasCancelled {
+                    transitionContext.completeTransition(false)
+                } else {
+                    transitionContext.completeTransition(true)
+                    toVc?.view.isHidden = false
+                    tempView.removeFromSuperview()
+                }
+            })
+        } else {
+            // 最小化编辑页面
+            let fromVc = transitionContext.viewController(forKey: .from)
+            let toVc = transitionContext.viewController(forKey: .to)
+            // 参照present动画的逻辑，present成功后，containerView的最后一个子视图就是截图视图，将其取出准备动画
+            let containerView = transitionContext.containerView
+            let subViewsArray = containerView.subviews
+            let tempView = subViewsArray[min(subViewsArray.count, max(0, subViewsArray.count - 2))]
+            // 动画
+            UIView.animate(withDuration: self.transitionDuration(using: transitionContext), delay: 0, options: .curveLinear, animations: {
+//                fromVc?.view.transform = CGAffineTransform.identity
+                fromVc?.view.transform = CGAffineTransform.init(translationX: 0, y: containerView.frame.height)
+                tempView.transform = CGAffineTransform.identity
+            }, completion: {
+                finished in
+                if transitionContext.transitionWasCancelled {
+                    transitionContext.completeTransition(false)
+                } else {
+                    transitionContext.completeTransition(true)
+                    toVc?.view.frame.size.height -= 50
+//                    tempView.frame.origin.y = containerView.frame.height - 50
+                    toVc?.view.isHidden = false
+                    tempView.removeFromSuperview()
+                }
+            })
+        }
     }
 }

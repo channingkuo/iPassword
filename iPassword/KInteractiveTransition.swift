@@ -32,15 +32,19 @@ class KInteractiveTransition : UIPercentDrivenInteractiveTransition {
     var viewController: UIViewController?
     var direction: KInteractiveTransitionGestureDirection?
     var type: KInteractiveTransitionType?
+//    var invokeMethod: KPresentOneTransitionClickOrGesture?
     
     var interation: Bool?
     
     var presentConfig: (() -> Void)?
     var pushConfig: (() -> Void)?
     
+    var view: UIView?
+    
     required init(type: KInteractiveTransitionType, GestureDirection direction: KInteractiveTransitionGestureDirection) {
         self.direction = direction
         self.type = type
+//        self.invokeMethod = invokeMethod
     }
 
     class func initWithTransitionTypeAndDirection(type: KInteractiveTransitionType, GestureDirection direction: KInteractiveTransitionGestureDirection) -> KInteractiveTransition {
@@ -50,10 +54,10 @@ class KInteractiveTransition : UIPercentDrivenInteractiveTransition {
     /// 添加Pan手势到View
     ///
     /// - Parameter vc: UIViewController
-    func addPanGestureToViewController(vc: UIViewController) -> Void {
+    func addPanGestureToViewController(vc: UIViewController, gestureView: UIView) -> Void {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleGesture))
         self.viewController = vc
-        vc.view.addGestureRecognizer(panGesture)
+        gestureView.addGestureRecognizer(panGesture)
     }
     
     /// 手势过渡的过程
@@ -62,20 +66,20 @@ class KInteractiveTransition : UIPercentDrivenInteractiveTransition {
         var persent: CGFloat = 0
         switch (self.direction) {
             case .KInteractiveTransitionGestureDirectionLeft?:
-                let transitionX = -panGesture.translation(in: panGesture.view).x
-                persent = transitionX / (panGesture.view?.frame.size.width)!
+                let transitionX = -panGesture.translation(in: self.viewController?.view).x
+                persent = transitionX / (self.viewController?.view?.frame.size.width)!
             break
             case .KInteractiveTransitionGestureDirectionRight?:
-                let transitionX = panGesture.translation(in: panGesture.view).x
-                persent = transitionX / (panGesture.view?.frame.size.width)!
+                let transitionX = panGesture.translation(in: self.viewController?.view).x
+                persent = transitionX / (self.viewController?.view?.frame.size.width)!
             break
             case .KInteractiveTransitionGestureDirectionUp?:
-                let transitionX = -panGesture.translation(in: panGesture.view).y
-                persent = transitionX / (panGesture.view?.frame.size.width)!
+                let transitionY = -panGesture.translation(in: self.viewController?.view).y
+                persent = transitionY / (self.viewController?.view?.frame.size.height)!
             break
             case .KInteractiveTransitionGestureDirectionDown?:
-                let transitionX = panGesture.translation(in: panGesture.view).y
-                persent = transitionX / (panGesture.view?.frame.size.width)!
+                let transitionY = panGesture.translation(in: self.viewController?.view).y
+                persent = transitionY / (self.viewController?.view?.frame.size.height)!
             break
             default: break
         }
@@ -105,13 +109,17 @@ class KInteractiveTransition : UIPercentDrivenInteractiveTransition {
     func startGesture() -> Void{
         switch (self.type) {
             case .KInteractiveTransitionTypePresent?:
-                presentConfig!()
+                if presentConfig != nil {
+                    presentConfig!()
+                }
                 break
             case .KInteractiveTransitionTypeDismiss?:
                 self.viewController?.dismiss(animated: true, completion: nil)
                 break
             case .KInteractiveTransitionTypePush?:
-                pushConfig!()
+                if pushConfig != nil {
+                    pushConfig!()
+                }
                 break
             case .KInteractiveTransitionTypePop?:
                 self.viewController?.navigationController?.popViewController(animated: true)

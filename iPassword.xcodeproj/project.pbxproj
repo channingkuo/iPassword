@@ -27,6 +27,7 @@
 		D79CFC0A2067C01600982571 /* RowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79CFC092067C01600982571 /* RowTableViewCell.swift */; };
 		D79E18E2203C43AF00691180 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79E18E1203C43AF00691180 /* NavigationController.swift */; };
 		D79E18E4203C43D800691180 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79E18E3203C43D800691180 /* TableViewController.swift */; };
+		D7C1DE06206FE0B7006B9D84 /* GlobalAppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C1DE05206FE0B7006B9D84 /* GlobalAppSetting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		D79CFC092067C01600982571 /* RowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTableViewCell.swift; sourceTree = "<group>"; };
 		D79E18E1203C43AF00691180 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D79E18E3203C43D800691180 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		D7C1DE05206FE0B7006B9D84 /* GlobalAppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAppSetting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				D76996B62062594500164FD8 /* KPresentTransition.swift */,
 				D79CFC092067C01600982571 /* RowTableViewCell.swift */,
 				D770360D203BFEB000527924 /* UIDeviceExtention.swift */,
+				D7C1DE05206FE0B7006B9D84 /* GlobalAppSetting.swift */,
 				D733CAF92039927100A83D3A /* LaunchScreen.storyboard */,
 				D733CAF72039927100A83D3A /* Assets.xcassets */,
 				D733CAFC2039927100A83D3A /* Info.plist */,
@@ -249,7 +252,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Channing Kuo";
 				TargetAttributes = {
 					D733CAE92039927100A83D3A = {
@@ -327,6 +330,7 @@
 				D79E18E4203C43D800691180 /* TableViewController.swift in Sources */,
 				D79E18E2203C43AF00691180 /* NavigationController.swift in Sources */,
 				D79CFC0A2067C01600982571 /* RowTableViewCell.swift in Sources */,
+				D7C1DE06206FE0B7006B9D84 /* GlobalAppSetting.swift in Sources */,
 				D770360E203BFEB000527924 /* UIDeviceExtention.swift in Sources */,
 				D733CAEE2039927100A83D3A /* AppDelegate.swift in Sources */,
 			);
@@ -397,6 +401,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -404,6 +409,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -454,6 +460,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -461,6 +468,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -504,7 +512,7 @@
 				INFOPLIST_FILE = iPassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Kuo.iPassword;
+				PRODUCT_BUNDLE_IDENTIFIER = "-0180330.iPassword";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -525,7 +533,7 @@
 				INFOPLIST_FILE = iPassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Kuo.iPassword;
+				PRODUCT_BUNDLE_IDENTIFIER = "-0180330.iPassword";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

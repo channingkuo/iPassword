@@ -13,6 +13,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var rightButtonItem = UIBarButtonItem()
     
     var interactivePush: KInteractiveTransition?
+    var minimizeView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +50,10 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             // Fallback on earlier versions
         }
-        self.rightButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(TableViewController.newone))
+        self.rightButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(newone))
         self.navigationItem.setRightBarButton(self.rightButtonItem, animated: true)
         
-        self.interactivePush = KInteractiveTransition.initWithTransitionTypeAndDirection(type: .KInteractiveTransitionTypePresent, GestureDirection: .KInteractiveTransitionGestureDirectionUp)
-//        self.interactivePush?.presentConfig = { [weak self] in
-//            self?.newone()
-//        }
-//        self.interactivePush?.addPanGestureToViewController(vc: self.navigationController!)
+        self.interactivePush = KInteractiveTransition.initWithTransitionTypeAndDirection(type: .KInteractiveTransitionTypePresent, GestureDirection: .KInteractiveTransitionGestureDirectionUp, delegate: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +65,11 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             // Fallback on earlier versions
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
     }
     
     @objc func newone() -> Void {
@@ -90,6 +92,57 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func interactiveTransitionForPresent() -> UIViewControllerInteractiveTransitioning {
         return self.interactivePush!
+    }
+    
+    /// 最小化页面后设置self.view的圆角
+    func recoveryTheCornerRadius() {
+        // 恢复view的圆角
+        self.navigationController?.view.layer.cornerRadius = 0
+        self.navigationController?.view.layer.masksToBounds = false
+        // 左下、右下添加圆角
+        let frame = CGRect(x: (self.navigationController?.view.bounds.origin.x)!, y: (self.navigationController?.view.bounds.origin.y)!, width: (self.navigationController?.view.bounds.width)!, height: (self.navigationController?.view.bounds.height)! - 50)
+        let maskPath = UIBezierPath.init(roundedRect: frame, byRoundingCorners: UIRectCorner(rawValue: UIRectCorner.RawValue(UInt8(UIRectCorner.bottomLeft.rawValue) | UInt8(UIRectCorner.bottomRight.rawValue))), cornerRadii: CGSize.init(width: 10, height: 10))
+        let maskLayer = CAShapeLayer.init()
+        maskLayer.frame = frame
+        maskLayer.path = maskPath.cgPath
+        self.navigationController?.view.layer.mask = maskLayer
+    }
+    
+    /// 添加最小化页面
+    func minimizeTheView() {
+        // 设置minimize view
+        let windowFrame = UIApplication.shared.delegate?.window??.frame
+        self.minimizeView = UIView(frame: CGRect(x: 0, y: (windowFrame?.height)! - 50, width: self.view.frame.width, height: 50))
+        self.minimizeView?.backgroundColor = UIColor(red: 243 / 255, green: 214 / 255, blue: 116 / 255, alpha: 1)
+        let minimizeTitle = UILabel(frame: CGRect(x: 0, y: 15, width: (self.minimizeView?.frame.width)!, height: 30))
+        minimizeTitle.text = "New Password"
+        minimizeTitle.textColor = .white
+        minimizeTitle.textAlignment = .center
+        minimizeTitle.attributedText = NSAttributedString(string: (minimizeTitle.text)!, attributes:[NSAttributedStringKey.font: UIFont(name: "Zapfino", size: 14.0)!])
+        self.minimizeView?.addSubview(minimizeTitle)
+        self.minimizeView?.tag = 1
+        let maskPath = UIBezierPath.init(roundedRect: (self.minimizeView?.bounds)!, byRoundingCorners: UIRectCorner(rawValue: UIRectCorner.RawValue(UInt8(UIRectCorner.topLeft.rawValue) | UInt8(UIRectCorner.topRight.rawValue))), cornerRadii: CGSize.init(width: 10, height: 10))
+        let maskLayer = CAShapeLayer.init()
+        maskLayer.frame = (self.minimizeView?.bounds)!
+        maskLayer.path = maskPath.cgPath
+        self.minimizeView?.layer.mask = maskLayer
+
+        self.minimizeView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureAction)))
+
+        UIApplication.shared.delegate?.window??.addSubview(self.minimizeView!)
+    }
+    
+    @objc func tapGestureAction(tapGesture: UITapGestureRecognizer) {
+        self.navigationController?.view.frame.size.height += 50
+        // 恢复self.navigationController?.view的layer高度
+        let maskPath1 = UIBezierPath.init(roundedRect: (self.navigationController?.view.bounds)!, byRoundingCorners: UIRectCorner(rawValue: UIRectCorner.RawValue(UInt8(UIRectCorner.bottomLeft.rawValue) | UInt8(UIRectCorner.bottomRight.rawValue))), cornerRadii: CGSize.init(width: 0, height: 0))
+        let maskLayer1 = CAShapeLayer.init()
+        maskLayer1.frame = (self.navigationController?.view.bounds)!
+        maskLayer1.path = maskPath1.cgPath
+        self.navigationController?.view.layer.mask = maskLayer1
+        self.minimizeView?.removeFromSuperview()
+        
+        self.newone()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,78 +181,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     }
    
-//        // setup pan/tap gesture to the view
-//        self.tapGesture.addTarget(self, action: #selector(TableViewController.tapGesture_Clicked))
-//        self.panGesture.addTarget(self, action: #selector(TableViewController.panGesture_drag))
-//        self.topTitleView.addGestureRecognizer(self.panGesture)
-    
-    /// view pan gesture
-    ///
-    /// - Parameter sender:
-//    @objc func panGesture_drag(sender : UIPanGestureRecognizer) {
-//        let translation = sender.translation(in: self.view)
-//        self.popedView.frame.origin.y += translation.y
-//        // TODO 移动过程中self.view的3D旋转动画
-//        sender.setTranslation(CGPoint.zero, in: self.view)
-//
-//        if sender.state == .ended {
-//            if (self.popedView.frame.origin.y > UIScreen.main.bounds.size.height / 2) && (self.popedView.frame.origin.y != 50) {
-//                if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.2") {
-//                    self.popedView.frame.origin.y = UIScreen.main.bounds.size.height - 60
-//                    self.popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
-//                } else {
-//                    self.popedView.frame.origin.y = UIScreen.main.bounds.size.height - 50
-//                }
-//                // 设置最小化后的编辑页面
-//                self.setupFinalSite()
-//
-//                if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.2") {
-//                    self.view.frame.size.height -= 62
-//                } else {
-//                    self.view.frame.size.height -= 52
-//                }
-//                self.view.layer.cornerRadius = 8.0
-//
-//                // 移除拖拽手势控件
-//                self.topTitleView.removeGestureRecognizer(self.panGesture)
-//                // 设置最小化后的view的点击事件————还原到编辑状态
-//                self.topTitleView.addGestureRecognizer(self.tapGesture)
-//                // 隐藏部分按钮
-//                self.cancelButton.isHidden = true
-//                self.saveButton.isHidden = true
-//                self.strightLine.isHidden = true
-//                self.popMin = true
-//            } else {
-//                self.popedView.frame.origin.y = 50
-//                self.popMin = false
-//            }
-//        }
-//    }
-    
-    /// view tap gesture
-    ///
-    /// - Parameter sender:
-//    @objc func tapGesture_Clicked(sender : UITapGestureRecognizer) {
-//        self.topTitleView.removeGestureRecognizer(self.tapGesture)
-//        self.topTitleView.addGestureRecognizer(self.panGesture)
-//
-//        if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.2") {
-//            self.view.frame.size.height += 62
-//            self.popedView.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 0.85)
-//        } else {
-//            self.view.frame.size.height += 52
-//        }
-//
-//        // 显示部分按钮
-//        self.cancelButton.isHidden = false
-//        self.saveButton.isHidden = false
-//        self.strightLine.isHidden = false
-//
-//        self.setupMaximize(minimize: self.popMin)
-//
-//        self.popMin = false
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -29,13 +29,17 @@ class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
     var type: KPresentOneTransitionType?
     var invokeMethod: KPresentOneTransitionClickOrGesture?
     
-    required init(type: KPresentOneTransitionType, invokeMethod: KPresentOneTransitionClickOrGesture) {
+    var delegate: KPresentedOneControllerDelegate?
+    
+    required init(type: KPresentOneTransitionType, invokeMethod: KPresentOneTransitionClickOrGesture, delegate: KPresentedOneControllerDelegate?) {
         self.type = type
         self.invokeMethod = invokeMethod
+        
+        self.delegate = delegate
     }
     
-    class func transitionWithTransitionType(type: KPresentOneTransitionType, invokeMethod: KPresentOneTransitionClickOrGesture) -> KPresentTransition {
-        return self.init(type: type, invokeMethod: invokeMethod)
+    class func transitionWithTransitionType(type: KPresentOneTransitionType, invokeMethod: KPresentOneTransitionClickOrGesture, delegate: KPresentedOneControllerDelegate?) -> KPresentTransition {
+        return self.init(type: type, invokeMethod: invokeMethod, delegate: delegate)
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -80,7 +84,7 @@ class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
         containerView.addSubview(tempView!)
         containerView.addSubview((toVc?.view)!)
         
-        // 设置fromVc的frame，因为这里toVc present出来不是全屏，且初始的时候在底部，如果不设置frame的话默认就是整个屏幕，
+        // 设置toVc的frame，因为这里toVc present出来不是全屏，且初始的时候在底部，如果不设置frame的话默认就是整个屏幕，
         // 这里containerView的frame就是整个屏幕
         toVc?.view.frame = CGRect(x: 0, y: containerView.frame.height, width: containerView.frame.width, height: containerView.frame.height - 50)
         
@@ -136,8 +140,7 @@ class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
             let tempView = subViewsArray[min(subViewsArray.count, max(0, subViewsArray.count - 2))]
             // 动画
             UIView.animate(withDuration: self.transitionDuration(using: transitionContext), delay: 0, options: .curveLinear, animations: {
-//                fromVc?.view.transform = CGAffineTransform.identity
-                fromVc?.view.transform = CGAffineTransform.init(translationX: 0, y: containerView.frame.height)
+                fromVc?.view.transform = CGAffineTransform.identity
                 tempView.transform = CGAffineTransform.identity
             }, completion: {
                 finished in
@@ -145,10 +148,14 @@ class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
                     transitionContext.completeTransition(false)
                 } else {
                     transitionContext.completeTransition(true)
-                    toVc?.view.frame.size.height -= 50
-//                    tempView.frame.origin.y = containerView.frame.height - 50
                     toVc?.view.isHidden = false
                     tempView.removeFromSuperview()
+
+                    // minimize view
+                    toVc?.view.frame.size.height -= 50
+                    if self.delegate != nil {
+                        self.delegate?.minimizeTheView()
+                    }
                 }
             })
         }

@@ -18,16 +18,18 @@ class ComposeViewController: UIViewController, UIViewControllerTransitioningDele
     
     var clickOrGesture: KPresentOneTransitionClickOrGesture = .KPresentOneTransitionGesture
     
-//    var tapGesture: UITapGestureRecognizer?
-//    var panGesture: UIPanGestureRecognizer?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.transitioningDelegate = self
         self.modalPresentationStyle = .custom
-        self.view.layer.cornerRadius = 10
-        self.view.layer.masksToBounds = true
+
+        // 左上、右上圆角
+        let maskPath = UIBezierPath.init(roundedRect: self.view.bounds, byRoundingCorners: UIRectCorner(rawValue: UIRectCorner.RawValue(UInt8(UIRectCorner.topLeft.rawValue) | UInt8(UIRectCorner.topRight.rawValue))), cornerRadii: CGSize.init(width: 10, height: 10))
+        let maskLayer = CAShapeLayer.init()
+        maskLayer.frame = self.view.bounds
+        maskLayer.path = maskPath.cgPath
+        self.view.layer.mask = maskLayer
         
         self.view.backgroundColor = UIColor(red: 246 / 255, green: 225 / 255, blue: 127 / 255, alpha: 1)
         
@@ -39,11 +41,11 @@ class ComposeViewController: UIViewController, UIViewControllerTransitioningDele
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return KPresentTransition.transitionWithTransitionType(type: .KPresentOneTransitionTypePresent, invokeMethod: .KPresentOneTransitionClick)
+        return KPresentTransition.transitionWithTransitionType(type: .KPresentOneTransitionTypePresent, invokeMethod: .KPresentOneTransitionClick, delegate: nil)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return KPresentTransition.transitionWithTransitionType(type: .KPresentOneTransitionTypeDismiss, invokeMethod: self.clickOrGesture)
+        return KPresentTransition.transitionWithTransitionType(type: .KPresentOneTransitionTypeDismiss, invokeMethod: self.clickOrGesture, delegate: delegate!)
     }
     
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -71,10 +73,6 @@ class ComposeViewController: UIViewController, UIViewControllerTransitioningDele
         // navigation view
         self.navigationView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
         self.navigationView?.backgroundColor = UIColor(red: 243 / 255, green: 214 / 255, blue: 116 / 255, alpha: 1)
-        //        self.navigationView?.layer.shadowColor = UIColor.black.cgColor
-        //        self.navigationView?.layer.shadowOffset = CGSize(width: 0.02, height: 0.02)
-        //        self.navigationView?.layer.shadowOpacity = 0.8
-        //        self.navigationView?.layer.shadowRadius = 1
         
         // cancel button
         self.cancelButton = UIButton(frame: CGRect(x: 10, y: 10, width: 60, height: 30))
@@ -112,10 +110,11 @@ class ComposeViewController: UIViewController, UIViewControllerTransitioningDele
         self.view.addSubview(self.navigatonTitle!)
         self.view.addSubview(self.strightLine!)
         
-        self.interactiveDismiss = KInteractiveTransition.init(type: .KInteractiveTransitionTypeDismiss, GestureDirection: .KInteractiveTransitionGestureDirectionDown)
+        self.interactiveDismiss = KInteractiveTransition.init(type: .KInteractiveTransitionTypeDismiss, GestureDirection: .KInteractiveTransitionGestureDirectionDown, delegate: delegate!)
         self.interactiveDismiss?.addPanGestureToViewController(vc: self, gestureView: self.navigationView!)
     }
     
+    /// 取消新建
     @objc func cancel_click(){
         if (delegate != nil) && (delegate?.responds(to: #selector(TableViewController.presentedOneControllerPressedDissmiss)))! {
             self.clickOrGesture = .KPresentOneTransitionClick
@@ -123,6 +122,7 @@ class ComposeViewController: UIViewController, UIViewControllerTransitioningDele
         }
     }
     
+    /// 保存新建数据
     @objc func save_click(){
         
     }
@@ -131,4 +131,6 @@ class ComposeViewController: UIViewController, UIViewControllerTransitioningDele
 protocol KPresentedOneControllerDelegate: NSObjectProtocol {
     func presentedOneControllerPressedDissmiss()
     func interactiveTransitionForPresent() -> UIViewControllerInteractiveTransitioning
+    func recoveryTheCornerRadius()
+    func minimizeTheView()
 }

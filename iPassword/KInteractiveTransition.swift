@@ -32,23 +32,23 @@ class KInteractiveTransition : UIPercentDrivenInteractiveTransition {
     var viewController: UIViewController?
     var direction: KInteractiveTransitionGestureDirection?
     var type: KInteractiveTransitionType?
-//    var invokeMethod: KPresentOneTransitionClickOrGesture?
     
     var interation: Bool?
     
     var presentConfig: (() -> Void)?
     var pushConfig: (() -> Void)?
     
-    var view: UIView?
+    var delegate: KPresentedOneControllerDelegate?
     
-    required init(type: KInteractiveTransitionType, GestureDirection direction: KInteractiveTransitionGestureDirection) {
+    required init(type: KInteractiveTransitionType, GestureDirection direction: KInteractiveTransitionGestureDirection, delegate: KPresentedOneControllerDelegate?) {
         self.direction = direction
         self.type = type
-//        self.invokeMethod = invokeMethod
+        
+        self.delegate = delegate
     }
 
-    class func initWithTransitionTypeAndDirection(type: KInteractiveTransitionType, GestureDirection direction: KInteractiveTransitionGestureDirection) -> KInteractiveTransition {
-        return self.init(type: type, GestureDirection: direction)
+    class func initWithTransitionTypeAndDirection(type: KInteractiveTransitionType, GestureDirection direction: KInteractiveTransitionGestureDirection, delegate: KPresentedOneControllerDelegate?) -> KInteractiveTransition {
+        return self.init(type: type, GestureDirection: direction, delegate: delegate)
     }
     
     /// 添加Pan手势到View
@@ -98,6 +98,10 @@ class KInteractiveTransition : UIPercentDrivenInteractiveTransition {
                 self.interation = false
                 if persent > 0.5 {
                     self.finish()
+                    
+                    if self.delegate != nil {
+                        self.delegate?.recoveryTheCornerRadius()
+                    }
                 } else {
                     self.cancel()
                 }

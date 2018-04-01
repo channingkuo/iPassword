@@ -7,17 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 class GlobalAppSetting {
-    // 是否完成了最小化动画
-    static var isFinishedMinimize: Bool{
+    // 最小化view的高度（区别iPhone X）
+    static var minimizeViewHeight: CGFloat {
         get{
-            let v = UserDefaults.standard.value(forKey: "isFinishedMinimize")
-            return v == nil ? false : v as! Bool
-        }
-        set{
-            UserDefaults.standard.set(newValue, forKey: "isFinishedMinimize")
-            UserDefaults.standard.synchronize()
+            if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.3") {
+                return 60
+            }
+            return 50
         }
     }
 }

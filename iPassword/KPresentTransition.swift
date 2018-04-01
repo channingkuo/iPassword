@@ -152,7 +152,7 @@ class KPresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
                     tempView.removeFromSuperview()
 
                     // minimize view
-                    toVc?.view.frame.size.height -= 50
+                    toVc?.view.frame.size.height -= GlobalAppSetting.minimizeViewHeight
                     if self.delegate != nil {
                         self.delegate?.minimizeTheView()
                     }

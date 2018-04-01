@@ -88,6 +88,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // 恢复view的圆角
         self.navigationController?.view.layer.cornerRadius = 0
         self.navigationController?.view.layer.masksToBounds = false
+        
+        // 恢复新建按钮
+        self.rightButtonItem.isEnabled = true
     }
     
     func interactiveTransitionForPresent() -> UIViewControllerInteractiveTransitioning {
@@ -100,7 +103,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.view.layer.cornerRadius = 0
         self.navigationController?.view.layer.masksToBounds = false
         // 左下、右下添加圆角
-        let frame = CGRect(x: (self.navigationController?.view.bounds.origin.x)!, y: (self.navigationController?.view.bounds.origin.y)!, width: (self.navigationController?.view.bounds.width)!, height: (self.navigationController?.view.bounds.height)! - 50)
+        let frame = CGRect(x: (self.navigationController?.view.bounds.origin.x)!, y: (self.navigationController?.view.bounds.origin.y)!, width: (self.navigationController?.view.bounds.width)!, height: (self.navigationController?.view.bounds.height)! - GlobalAppSetting.minimizeViewHeight)
         let maskPath = UIBezierPath.init(roundedRect: frame, byRoundingCorners: UIRectCorner(rawValue: UIRectCorner.RawValue(UInt8(UIRectCorner.bottomLeft.rawValue) | UInt8(UIRectCorner.bottomRight.rawValue))), cornerRadii: CGSize.init(width: 10, height: 10))
         let maskLayer = CAShapeLayer.init()
         maskLayer.frame = frame
@@ -112,7 +115,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func minimizeTheView() {
         // 设置minimize view
         let windowFrame = UIApplication.shared.delegate?.window??.frame
-        self.minimizeView = UIView(frame: CGRect(x: 0, y: (windowFrame?.height)! - 50, width: self.view.frame.width, height: 50))
+        self.minimizeView = UIView(frame: CGRect(x: 0, y: (windowFrame?.height)! - GlobalAppSetting.minimizeViewHeight, width: self.view.frame.width, height: GlobalAppSetting.minimizeViewHeight))
         self.minimizeView?.backgroundColor = UIColor(red: 243 / 255, green: 214 / 255, blue: 116 / 255, alpha: 1)
         let minimizeTitle = UILabel(frame: CGRect(x: 0, y: 15, width: (self.minimizeView?.frame.width)!, height: 30))
         minimizeTitle.text = "New Password"
@@ -130,10 +133,13 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.minimizeView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureAction)))
 
         UIApplication.shared.delegate?.window??.addSubview(self.minimizeView!)
+        
+        // 禁用新建按钮
+        self.rightButtonItem.isEnabled = false
     }
     
     @objc func tapGestureAction(tapGesture: UITapGestureRecognizer) {
-        self.navigationController?.view.frame.size.height += 50
+        self.navigationController?.view.frame.size.height += GlobalAppSetting.minimizeViewHeight
         // 恢复self.navigationController?.view的layer高度
         let maskPath1 = UIBezierPath.init(roundedRect: (self.navigationController?.view.bounds)!, byRoundingCorners: UIRectCorner(rawValue: UIRectCorner.RawValue(UInt8(UIRectCorner.bottomLeft.rawValue) | UInt8(UIRectCorner.bottomRight.rawValue))), cornerRadii: CGSize.init(width: 0, height: 0))
         let maskLayer1 = CAShapeLayer.init()

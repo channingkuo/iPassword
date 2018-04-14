@@ -13,6 +13,9 @@ class NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 初始化sqlite3
+        SQLiteUtils.initTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -12,11 +12,18 @@ import UIKit
 class GlobalAppSetting {
     // 最小化view的高度（区别iPhone X）
     static var minimizeViewHeight: CGFloat {
-        get{
+        get {
             if UIDevice().deviceName == "iPhone X" || (UIDevice().deviceName == "Simulator" && UIDevice().systemVersion == "11.3") {
                 return 60
             }
             return 50
+        }
+    }
+    
+    // Table View Row Cell Height
+    static var tableRowHeight: CGFloat {
+        get {
+            return 65
         }
     }
 }

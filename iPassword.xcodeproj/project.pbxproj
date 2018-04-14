@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D71732D32060FF58000BD1CD /* KInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71732D22060FF58000BD1CD /* KInteractiveTransition.swift */; };
-		D733CAEE2039927100A83D3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D733CAED2039927100A83D3A /* AppDelegate.swift */; };
-		D733CAF32039927100A83D3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D733CAF12039927100A83D3A /* Main.storyboard */; };
-		D733CAF62039927100A83D3A /* iPassword.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D733CAF42039927100A83D3A /* iPassword.xcdatamodeld */; };
-		D733CAF82039927100A83D3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D733CAF72039927100A83D3A /* Assets.xcassets */; };
-		D733CAFB2039927100A83D3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D733CAF92039927100A83D3A /* LaunchScreen.storyboard */; };
+		D7258DF72082329200A00C17 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7258DF12082329200A00C17 /* ImageUtils.swift */; };
+		D7258DF82082329200A00C17 /* SQLiteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7258DF22082329200A00C17 /* SQLiteUtils.swift */; };
+		D7258DF92082329200A00C17 /* UIDeviceExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7258DF32082329200A00C17 /* UIDeviceExtention.swift */; };
+		D7258DFA2082329200A00C17 /* GlobalAppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7258DF42082329200A00C17 /* GlobalAppSetting.swift */; };
+		D7258DFB2082329200A00C17 /* DateTimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7258DF52082329200A00C17 /* DateTimeUtils.swift */; };
+		D7258DFC2082329200A00C17 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7258DF62082329200A00C17 /* NSDateExtension.swift */; };
+		D7258E032082331000A00C17 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7258E022082331000A00C17 /* Info.plist */; };
+		D7258E062082336200A00C17 /* iPassword.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D7258E042082336200A00C17 /* iPassword.xcdatamodeld */; };
+		D7258E082082337800A00C17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7258E072082337700A00C17 /* Assets.xcassets */; };
+		D7258E0D2082338000A00C17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7258E092082338000A00C17 /* LaunchScreen.storyboard */; };
+		D7258E0E2082338000A00C17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7258E0B2082338000A00C17 /* Main.storyboard */; };
 		D733CB062039927200A83D3A /* iPasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D733CB052039927200A83D3A /* iPasswordTests.swift */; };
 		D733CB112039927200A83D3A /* iPasswordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D733CB102039927200A83D3A /* iPasswordUITests.swift */; };
 		D760323D2039991600B042F9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D760323B2039931C00B042F9 /* SwiftyJSON.framework */; };
@@ -21,13 +26,15 @@
 		D76032412039991900B042F9 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032392039931A00B042F9 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D76032422039991E00B042F9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; };
 		D76032432039991E00B042F9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D76996B72062594500164FD8 /* KPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76996B62062594500164FD8 /* KPresentTransition.swift */; };
-		D770360E203BFEB000527924 /* UIDeviceExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770360D203BFEB000527924 /* UIDeviceExtention.swift */; };
-		D79CFC082067BB3500982571 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79CFC072067BB3500982571 /* ComposeViewController.swift */; };
-		D79CFC0A2067C01600982571 /* RowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79CFC092067C01600982571 /* RowTableViewCell.swift */; };
-		D79E18E2203C43AF00691180 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79E18E1203C43AF00691180 /* NavigationController.swift */; };
-		D79E18E4203C43D800691180 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79E18E3203C43D800691180 /* TableViewController.swift */; };
-		D7C1DE06206FE0B7006B9D84 /* GlobalAppSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C1DE05206FE0B7006B9D84 /* GlobalAppSetting.swift */; };
+		D7B3A2A8208212E60059468E /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B3A2A220820DCA0059468E /* SQLite.framework */; };
+		D7B3A2A9208212E60059468E /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D7B3A2A220820DCA0059468E /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D7B3A2B92082310C0059468E /* RowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3A2B42082310C0059468E /* RowTableViewCell.swift */; };
+		D7B3A2BA2082310C0059468E /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3A2B52082310C0059468E /* NavigationController.swift */; };
+		D7B3A2BB2082310C0059468E /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3A2B62082310C0059468E /* ComposeViewController.swift */; };
+		D7B3A2BC2082310C0059468E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3A2B72082310C0059468E /* AppDelegate.swift */; };
+		D7B3A2BD2082310C0059468E /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3A2B82082310C0059468E /* TableViewController.swift */; };
+		D7FCDE5620823166008E104D /* KPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FCDE5420823166008E104D /* KPresentTransition.swift */; };
+		D7FCDE5720823166008E104D /* KInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FCDE5520823166008E104D /* KInteractiveTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +63,7 @@
 			files = (
 				D76032412039991900B042F9 /* SVProgressHUD.framework in Embed Frameworks */,
 				D76032432039991E00B042F9 /* Alamofire.framework in Embed Frameworks */,
+				D7B3A2A9208212E60059468E /* SQLite.framework in Embed Frameworks */,
 				D760323E2039991600B042F9 /* SwiftyJSON.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -64,14 +72,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D71732D22060FF58000BD1CD /* KInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KInteractiveTransition.swift; sourceTree = "<group>"; };
+		D7258DF12082329200A00C17 /* ImageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageUtils.swift; path = utils/ImageUtils.swift; sourceTree = "<group>"; };
+		D7258DF22082329200A00C17 /* SQLiteUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SQLiteUtils.swift; path = utils/SQLiteUtils.swift; sourceTree = "<group>"; };
+		D7258DF32082329200A00C17 /* UIDeviceExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIDeviceExtention.swift; path = utils/UIDeviceExtention.swift; sourceTree = "<group>"; };
+		D7258DF42082329200A00C17 /* GlobalAppSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalAppSetting.swift; path = utils/GlobalAppSetting.swift; sourceTree = "<group>"; };
+		D7258DF52082329200A00C17 /* DateTimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateTimeUtils.swift; path = utils/DateTimeUtils.swift; sourceTree = "<group>"; };
+		D7258DF62082329200A00C17 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = utils/NSDateExtension.swift; sourceTree = "<group>"; };
+		D7258E022082331000A00C17 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7258E052082336200A00C17 /* iPassword.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPassword.xcdatamodel; sourceTree = "<group>"; };
+		D7258E072082337700A00C17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D7258E0A2082338000A00C17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D7258E0C2082338000A00C17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D733CAEA2039927100A83D3A /* iPassword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPassword.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D733CAED2039927100A83D3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D733CAF22039927100A83D3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D733CAF52039927100A83D3A /* iPassword.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iPassword.xcdatamodel; sourceTree = "<group>"; };
-		D733CAF72039927100A83D3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D733CAFA2039927100A83D3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D733CAFC2039927100A83D3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D733CB012039927200A83D3A /* iPasswordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPasswordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D733CB052039927200A83D3A /* iPasswordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPasswordTests.swift; sourceTree = "<group>"; };
 		D733CB072039927200A83D3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,13 +93,14 @@
 		D76032372039931700B042F9 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D76032392039931A00B042F9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D760323B2039931C00B042F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		D76996B62062594500164FD8 /* KPresentTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPresentTransition.swift; sourceTree = "<group>"; };
-		D770360D203BFEB000527924 /* UIDeviceExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtention.swift; sourceTree = "<group>"; };
-		D79CFC072067BB3500982571 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
-		D79CFC092067C01600982571 /* RowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTableViewCell.swift; sourceTree = "<group>"; };
-		D79E18E1203C43AF00691180 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		D79E18E3203C43D800691180 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		D7C1DE05206FE0B7006B9D84 /* GlobalAppSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAppSetting.swift; sourceTree = "<group>"; };
+		D7B3A2A220820DCA0059468E /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		D7B3A2B42082310C0059468E /* RowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RowTableViewCell.swift; path = views/RowTableViewCell.swift; sourceTree = "<group>"; };
+		D7B3A2B52082310C0059468E /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = views/NavigationController.swift; sourceTree = "<group>"; };
+		D7B3A2B62082310C0059468E /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ComposeViewController.swift; path = views/ComposeViewController.swift; sourceTree = "<group>"; };
+		D7B3A2B72082310C0059468E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = views/AppDelegate.swift; sourceTree = "<group>"; };
+		D7B3A2B82082310C0059468E /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = views/TableViewController.swift; sourceTree = "<group>"; };
+		D7FCDE5420823166008E104D /* KPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KPresentTransition.swift; path = transition/KPresentTransition.swift; sourceTree = "<group>"; };
+		D7FCDE5520823166008E104D /* KInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KInteractiveTransition.swift; path = transition/KInteractiveTransition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +110,7 @@
 			files = (
 				D760323D2039991600B042F9 /* SwiftyJSON.framework in Frameworks */,
 				D76032422039991E00B042F9 /* Alamofire.framework in Frameworks */,
+				D7B3A2A8208212E60059468E /* SQLite.framework in Frameworks */,
 				D76032402039991900B042F9 /* SVProgressHUD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +132,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D7258DF02082327A00A00C17 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				D7258DF42082329200A00C17 /* GlobalAppSetting.swift */,
+				D7258DF22082329200A00C17 /* SQLiteUtils.swift */,
+				D7258DF52082329200A00C17 /* DateTimeUtils.swift */,
+				D7258DF12082329200A00C17 /* ImageUtils.swift */,
+				D7258DF62082329200A00C17 /* NSDateExtension.swift */,
+				D7258DF32082329200A00C17 /* UIDeviceExtention.swift */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		D733CAE12039927100A83D3A = {
 			isa = PBXGroup;
 			children = (
@@ -142,20 +169,14 @@
 		D733CAEC2039927100A83D3A /* iPassword */ = {
 			isa = PBXGroup;
 			children = (
-				D733CAED2039927100A83D3A /* AppDelegate.swift */,
-				D733CAF12039927100A83D3A /* Main.storyboard */,
-				D79E18E1203C43AF00691180 /* NavigationController.swift */,
-				D79E18E3203C43D800691180 /* TableViewController.swift */,
-				D79CFC072067BB3500982571 /* ComposeViewController.swift */,
-				D71732D22060FF58000BD1CD /* KInteractiveTransition.swift */,
-				D76996B62062594500164FD8 /* KPresentTransition.swift */,
-				D79CFC092067C01600982571 /* RowTableViewCell.swift */,
-				D770360D203BFEB000527924 /* UIDeviceExtention.swift */,
-				D7C1DE05206FE0B7006B9D84 /* GlobalAppSetting.swift */,
-				D733CAF92039927100A83D3A /* LaunchScreen.storyboard */,
-				D733CAF72039927100A83D3A /* Assets.xcassets */,
-				D733CAFC2039927100A83D3A /* Info.plist */,
-				D733CAF42039927100A83D3A /* iPassword.xcdatamodeld */,
+				D7B3A2B3208230E90059468E /* views */,
+				D7258DF02082327A00A00C17 /* utils */,
+				D7B3A2CB208231360059468E /* transition */,
+				D7258E022082331000A00C17 /* Info.plist */,
+				D7258E042082336200A00C17 /* iPassword.xcdatamodeld */,
+				D7258E072082337700A00C17 /* Assets.xcassets */,
+				D7258E0B2082338000A00C17 /* Main.storyboard */,
+				D7258E092082338000A00C17 /* LaunchScreen.storyboard */,
 			);
 			path = iPassword;
 			sourceTree = "<group>";
@@ -181,11 +202,33 @@
 		D76032362039931700B042F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D7B3A2A220820DCA0059468E /* SQLite.framework */,
 				D760323B2039931C00B042F9 /* SwiftyJSON.framework */,
 				D76032392039931A00B042F9 /* SVProgressHUD.framework */,
 				D76032372039931700B042F9 /* Alamofire.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D7B3A2B3208230E90059468E /* views */ = {
+			isa = PBXGroup;
+			children = (
+				D7B3A2B72082310C0059468E /* AppDelegate.swift */,
+				D7B3A2B52082310C0059468E /* NavigationController.swift */,
+				D7B3A2B82082310C0059468E /* TableViewController.swift */,
+				D7B3A2B42082310C0059468E /* RowTableViewCell.swift */,
+				D7B3A2B62082310C0059468E /* ComposeViewController.swift */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		D7B3A2CB208231360059468E /* transition */ = {
+			isa = PBXGroup;
+			children = (
+				D7FCDE5520823166008E104D /* KInteractiveTransition.swift */,
+				D7FCDE5420823166008E104D /* KPresentTransition.swift */,
+			);
+			name = transition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +300,7 @@
 				TargetAttributes = {
 					D733CAE92039927100A83D3A = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 					D733CB002039927200A83D3A = {
@@ -296,9 +340,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D733CAFB2039927100A83D3A /* LaunchScreen.storyboard in Resources */,
-				D733CAF82039927100A83D3A /* Assets.xcassets in Resources */,
-				D733CAF32039927100A83D3A /* Main.storyboard in Resources */,
+				D7258E0D2082338000A00C17 /* LaunchScreen.storyboard in Resources */,
+				D7258E082082337800A00C17 /* Assets.xcassets in Resources */,
+				D7258E032082331000A00C17 /* Info.plist in Resources */,
+				D7258E0E2082338000A00C17 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,16 +368,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D79CFC082067BB3500982571 /* ComposeViewController.swift in Sources */,
-				D71732D32060FF58000BD1CD /* KInteractiveTransition.swift in Sources */,
-				D733CAF62039927100A83D3A /* iPassword.xcdatamodeld in Sources */,
-				D76996B72062594500164FD8 /* KPresentTransition.swift in Sources */,
-				D79E18E4203C43D800691180 /* TableViewController.swift in Sources */,
-				D79E18E2203C43AF00691180 /* NavigationController.swift in Sources */,
-				D79CFC0A2067C01600982571 /* RowTableViewCell.swift in Sources */,
-				D7C1DE06206FE0B7006B9D84 /* GlobalAppSetting.swift in Sources */,
-				D770360E203BFEB000527924 /* UIDeviceExtention.swift in Sources */,
-				D733CAEE2039927100A83D3A /* AppDelegate.swift in Sources */,
+				D7258DF92082329200A00C17 /* UIDeviceExtention.swift in Sources */,
+				D7B3A2B92082310C0059468E /* RowTableViewCell.swift in Sources */,
+				D7258E062082336200A00C17 /* iPassword.xcdatamodeld in Sources */,
+				D7258DFC2082329200A00C17 /* NSDateExtension.swift in Sources */,
+				D7B3A2BD2082310C0059468E /* TableViewController.swift in Sources */,
+				D7258DF72082329200A00C17 /* ImageUtils.swift in Sources */,
+				D7B3A2BA2082310C0059468E /* NavigationController.swift in Sources */,
+				D7258DFA2082329200A00C17 /* GlobalAppSetting.swift in Sources */,
+				D7FCDE5620823166008E104D /* KPresentTransition.swift in Sources */,
+				D7FCDE5720823166008E104D /* KInteractiveTransition.swift in Sources */,
+				D7258DFB2082329200A00C17 /* DateTimeUtils.swift in Sources */,
+				D7B3A2BC2082310C0059468E /* AppDelegate.swift in Sources */,
+				D7B3A2BB2082310C0059468E /* ComposeViewController.swift in Sources */,
+				D7258DF82082329200A00C17 /* SQLiteUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,20 +417,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D733CAF12039927100A83D3A /* Main.storyboard */ = {
+		D7258E092082338000A00C17 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D733CAF22039927100A83D3A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D733CAF92039927100A83D3A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D733CAFA2039927100A83D3A /* Base */,
+				D7258E0A2082338000A00C17 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D7258E0B2082338000A00C17 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7258E0C2082338000A00C17 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -503,6 +552,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4S5QJYZKK2;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -512,8 +562,9 @@
 				INFOPLIST_FILE = iPassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-0180330.iPassword";
+				PRODUCT_BUNDLE_IDENTIFIER = "-0180414.iPassword";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -524,6 +575,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4S5QJYZKK2;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -533,7 +585,7 @@
 				INFOPLIST_FILE = iPassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-0180330.iPassword";
+				PRODUCT_BUNDLE_IDENTIFIER = "-0180414.iPassword";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -648,12 +700,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D733CAF42039927100A83D3A /* iPassword.xcdatamodeld */ = {
+		D7258E042082336200A00C17 /* iPassword.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D733CAF52039927100A83D3A /* iPassword.xcdatamodel */,
+				D7258E052082336200A00C17 /* iPassword.xcdatamodel */,
 			);
-			currentVersion = D733CAF52039927100A83D3A /* iPassword.xcdatamodel */;
+			currentVersion = D7258E052082336200A00C17 /* iPassword.xcdatamodel */;
 			path = iPassword.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

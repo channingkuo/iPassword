@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, KPresentedOneControllerDelegate {
     @IBOutlet var tableview: UITableView!
@@ -14,6 +15,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var interactivePush: KInteractiveTransition?
     var minimizeView: UIView?
+    
+    // data rows
+    var datatable: Array<SQLite.Row>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +69,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             // Fallback on earlier versions
         }
+        
+        // 获取 data row
+        self.datatable = Array(try! SQLiteUtils.db.prepare(SQLiteUtils.table))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -156,24 +163,26 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return self.datatable.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return GlobalAppSetting.tableRowHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier")
-        if (cell == nil) {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "cellIdentifier")
+        if self.datatable.count < indexPath.row {
+            return RowTableViewCell()
         }
-        cell?.textLabel?.text = String(indexPath.row)
-        return cell!
+        let row = self.datatable[indexPath.row]
+        let cellIdentifier = row[SQLiteUtils.id]
+        let cell: RowTableViewCell = RowTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier) as UITableViewCell as! RowTableViewCell
+        cell.setRowData(row: row)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

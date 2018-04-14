@@ -77,6 +77,7 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         self.datatable = Array(try! SQLiteUtils.db.prepare(SQLiteUtils.table))
         
 //        try! SQLiteUtils.db.run(SQLiteUtils.table.insert(SQLiteUtils.title <- "test", SQLiteUtils.account <- "test@test.com", SQLiteUtils.password <- "1234567", SQLiteUtils.icon <- "default.png", SQLiteUtils.modifytime <- "2018-04-14 23:10:10", SQLiteUtils.remark <- "tettttdfghjk", SQLiteUtils.index <- 0, SQLiteUtils.id <- UUID().uuidString))
+        
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -178,23 +179,13 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let blankView = UIView(frame: self.view.frame)
-        blankView.backgroundColor = .red
-        
         if #available(iOS 11.0, *) {
             if navigationItem.searchController?.isActive == true {
                 return self.searchDataTable.count
             } else {
-                if self.datatable.count <= 0 {
-                    self.navigationController?.navigationBar.prefersLargeTitles = false
-                    self.view.addSubview(blankView)
-                }
                 return self.datatable.count
             }
         } else {
-            if self.datatable.count <= 0 {
-                self.view.addSubview(blankView)
-            }
             return self.datatable.count
         }
     }
@@ -213,6 +204,7 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         }
         var row: SQLite.Row
         if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
             if navigationItem.searchController?.isActive == true {
                 row = self.searchDataTable[indexPath.row]
             } else {
@@ -222,7 +214,7 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
             row = self.datatable[indexPath.row]
         }
         let cellIdentifier = row[SQLiteUtils.id]
-        let cell: RowTableViewCell = RowTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier) as UITableViewCell as! RowTableViewCell
+        let cell: RowTableViewCell = RowTableViewCell(style: .default, reuseIdentifier: cellIdentifier)
         cell.setRowData(row: row)
         return cell
     }

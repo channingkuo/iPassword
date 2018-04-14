@@ -25,6 +25,7 @@
 		D76032412039991900B042F9 /* SVProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032392039931A00B042F9 /* SVProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D76032422039991E00B042F9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; };
 		D76032432039991E00B042F9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D76032372039931700B042F9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D7A3CED42082753200CCD945 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A3CED32082753200CCD945 /* EmptyTableViewCell.swift */; };
 		D7B3A2A8208212E60059468E /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B3A2A220820DCA0059468E /* SQLite.framework */; };
 		D7B3A2A9208212E60059468E /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D7B3A2A220820DCA0059468E /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D7B3A2B92082310C0059468E /* RowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3A2B42082310C0059468E /* RowTableViewCell.swift */; };
@@ -92,6 +93,7 @@
 		D76032372039931700B042F9 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D76032392039931A00B042F9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		D760323B2039931C00B042F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D7A3CED32082753200CCD945 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyTableViewCell.swift; path = views/EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		D7B3A2A220820DCA0059468E /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		D7B3A2B42082310C0059468E /* RowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RowTableViewCell.swift; path = views/RowTableViewCell.swift; sourceTree = "<group>"; };
 		D7B3A2B52082310C0059468E /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = views/NavigationController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				D7B3A2B52082310C0059468E /* NavigationController.swift */,
 				D7B3A2B82082310C0059468E /* TableViewController.swift */,
 				D7B3A2B42082310C0059468E /* RowTableViewCell.swift */,
+				D7A3CED32082753200CCD945 /* EmptyTableViewCell.swift */,
 				D7B3A2B62082310C0059468E /* ComposeViewController.swift */,
 			);
 			name = views;
@@ -374,6 +377,7 @@
 				D7258DF72082329200A00C17 /* ImageUtils.swift in Sources */,
 				D7B3A2BA2082310C0059468E /* NavigationController.swift in Sources */,
 				D7258DFA2082329200A00C17 /* GlobalAppSetting.swift in Sources */,
+				D7A3CED42082753200CCD945 /* EmptyTableViewCell.swift in Sources */,
 				D7FCDE5620823166008E104D /* KPresentTransition.swift in Sources */,
 				D7FCDE5720823166008E104D /* KInteractiveTransition.swift in Sources */,
 				D7258DFB2082329200A00C17 /* DateTimeUtils.swift in Sources */,

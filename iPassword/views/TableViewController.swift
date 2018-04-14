@@ -9,7 +9,7 @@
 import UIKit
 import SQLite
 
-class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, KPresentedOneControllerDelegate {
+class TableViewController: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, KPresentedOneControllerDelegate {
     @IBOutlet var tableview: UITableView!
     var rightButtonItem = UIBarButtonItem()
     
@@ -18,6 +18,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // data rows
     var datatable: Array<SQLite.Row>!
+    var searchDataTable: Array<SQLite.Row>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             ]}()
 
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self as? UISearchResultsUpdating
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
         if #available(iOS 11.0, *) {
             self.navigationItem.searchController = searchController
             self.navigationController?.navigationBar.largeTitleTextAttributes = {[
@@ -72,6 +75,18 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // 获取 data row
         self.datatable = Array(try! SQLiteUtils.db.prepare(SQLiteUtils.table))
+        
+//        try! SQLiteUtils.db.run(SQLiteUtils.table.insert(SQLiteUtils.title <- "test", SQLiteUtils.account <- "test@test.com", SQLiteUtils.password <- "1234567", SQLiteUtils.icon <- "default.png", SQLiteUtils.modifytime <- "2018-04-14 23:10:10", SQLiteUtils.remark <- "tettttdfghjk", SQLiteUtils.index <- 0, SQLiteUtils.id <- UUID().uuidString))
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchString = searchController.searchBar.text!
+        
+        self.searchDataTable = self.datatable.filter({ (row) -> Bool in
+            return row[SQLiteUtils.title].contains(searchString) || row[SQLiteUtils.account].contains(searchString) || row[SQLiteUtils.remark].contains(searchString)
+        })
+        
+        self.tableview.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -163,7 +178,25 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.datatable.count
+        let blankView = UIView(frame: self.view.frame)
+        blankView.backgroundColor = .red
+        
+        if #available(iOS 11.0, *) {
+            if navigationItem.searchController?.isActive == true {
+                return self.searchDataTable.count
+            } else {
+                if self.datatable.count <= 0 {
+                    self.navigationController?.navigationBar.prefersLargeTitles = false
+                    self.view.addSubview(blankView)
+                }
+                return self.datatable.count
+            }
+        } else {
+            if self.datatable.count <= 0 {
+                self.view.addSubview(blankView)
+            }
+            return self.datatable.count
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -178,7 +211,16 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if self.datatable.count < indexPath.row {
             return RowTableViewCell()
         }
-        let row = self.datatable[indexPath.row]
+        var row: SQLite.Row
+        if #available(iOS 11.0, *) {
+            if navigationItem.searchController?.isActive == true {
+                row = self.searchDataTable[indexPath.row]
+            } else {
+                row = self.datatable[indexPath.row]
+            }
+        } else {
+            row = self.datatable[indexPath.row]
+        }
         let cellIdentifier = row[SQLiteUtils.id]
         let cell: RowTableViewCell = RowTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: cellIdentifier) as UITableViewCell as! RowTableViewCell
         cell.setRowData(row: row)

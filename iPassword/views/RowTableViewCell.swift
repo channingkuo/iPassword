@@ -19,7 +19,7 @@ class RowTableViewCell : UITableViewCell{
         
         selectionStyle = UITableViewCellSelectionStyle.default
         
-        self.iconView = UIImageView.init(image: UIImage.init(named: "default_icon.png"))
+        self.iconView = UIImageView.init(image: UIImage.init(named: "default.png"))
         contentView.addSubview(self.iconView)
         
         self.title = UILabel()

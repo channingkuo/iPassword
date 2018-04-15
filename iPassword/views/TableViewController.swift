@@ -223,6 +223,29 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle != UITableViewCellEditingStyle.delete{
+            return
+        }
+        
+        if self.datatable.count < indexPath.row {
+            return
+        }
+        // 删掉一条数据
+        let row = self.datatable[indexPath.row]
+        for (index, value) in self.datatable.enumerated() {
+            if value[SQLiteUtils.id] == row[SQLiteUtils.id] {
+                self.datatable.remove(at: index)
+                break
+            }
+        }
+
+        // 同步SQLite数据库
+        try! SQLiteUtils.db.run(SQLiteUtils.table.filter(SQLiteUtils.id == row[SQLiteUtils.id]).delete())
+
+        self.tableview.reloadData()
+    }
+    
     /// 滚动试图页面，改变NavigationBar形态、ToolBar等控件
     ///
     /// - Parameter scrollView:

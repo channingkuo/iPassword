@@ -20,6 +20,8 @@ class RowTableViewCell : UITableViewCell{
         selectionStyle = UITableViewCellSelectionStyle.default
         
         self.iconView = UIImageView.init(image: UIImage.init(named: "default.png"))
+        self.iconView.layer.cornerRadius = 6
+        self.iconView.layer.masksToBounds = true
         contentView.addSubview(self.iconView)
         
         self.title = UILabel()

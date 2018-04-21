@@ -100,7 +100,14 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         self.navigationController?.view.layer.cornerRadius = 10
         self.navigationController?.view.layer.masksToBounds = true
         
-        let composeVc = ComposeViewController()
+        // 从缓存表中取数据，若有缓存数据则把数据id传给ComposeViewController
+        let row = try! SQLiteUtils.db.pluck(SQLiteUtils.bufferTable)
+        
+        var composeVc: ComposeViewController
+        if row != nil {
+            composeVc = ComposeViewController.init(rowId: row?[SQLiteUtils.id])
+        }
+        composeVc = ComposeViewController.init(rowId: nil)
         composeVc.delegate = self
         self.present(composeVc, animated: true, completion: nil)
     }

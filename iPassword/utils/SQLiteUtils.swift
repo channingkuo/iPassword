@@ -13,7 +13,10 @@ class SQLiteUtils {
     
     private static let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
     public static let db = try! Connection("\(SQLiteUtils.path)/db.sqlite3")
+    
     public static let table = Table("password")
+    public static let bufferTable = Table("buffer-table")
+    
     public static let title = Expression<String>("title")
     public static let account = Expression<String>("account")
     public static let password = Expression<String>("password")
@@ -25,6 +28,18 @@ class SQLiteUtils {
     
     class func initTable() {
         try! self.db.run(self.table.create(ifNotExists: true, block: { t in
+            t.column(self.title)
+            t.column(self.account)
+            t.column(self.password)
+            t.column(self.icon)
+            t.column(self.modifytime)
+            t.column(self.remark)
+            t.column(self.index, unique: true)
+            t.column(self.id, primaryKey: true)
+        }))
+        
+        // 新建数据的缓存表，用于在新建页最小化时的保存数据
+        try! self.db.run(self.bufferTable.create(ifNotExists: true, block: { t in
             t.column(self.title)
             t.column(self.account)
             t.column(self.password)

@@ -8,6 +8,7 @@
 
 import UIKit
 import SQLite
+import DZNEmptyDataSet
 
 class TableViewController: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, KPresentedOneControllerDelegate {
     @IBOutlet var tableview: UITableView!
@@ -105,8 +106,10 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         
         var composeVc: ComposeViewController
         if row != nil {
+            print("test1")
             composeVc = ComposeViewController.init(rowId: row?[SQLiteUtils.id])
         }
+        print("test2")
         composeVc = ComposeViewController.init(rowId: nil)
         composeVc.delegate = self
         self.present(composeVc, animated: true, completion: nil)
@@ -227,6 +230,17 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 查看
+        var row: SQLite.Row
+        if #available(iOS 11.0, *) {
+            if navigationItem.searchController?.isActive == true {
+                row = self.searchDataTable[indexPath.row]
+            } else {
+                row = self.datatable[indexPath.row]
+            }
+        } else {
+            row = self.datatable[indexPath.row]
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

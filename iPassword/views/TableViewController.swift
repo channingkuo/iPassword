@@ -10,7 +10,7 @@ import UIKit
 import SQLite
 import DZNEmptyDataSet
 
-class TableViewController: UIViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, KPresentedOneControllerDelegate {
+class TableViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, KPresentedOneControllerDelegate {
     @IBOutlet var tableview: UITableView!
     var rightButtonItem = UIBarButtonItem()
     
@@ -25,6 +25,11 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         super.viewDidLoad()
         
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        self.tableview.emptyDataSetDelegate = self
+        self.tableview.emptyDataSetSource = self
+        
+        self.tableview.tableFooterView = UIView()
         
 //        if #available(iOS 11.0, *) {
 //            self.tableview.contentInsetAdjustmentBehavior = .never
@@ -42,7 +47,7 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = {[
             NSAttributedStringKey.foregroundColor: UIColor.white,
-            NSAttributedStringKey.font: UIFont(name: "Zapfino", size: 18.0)!
+            NSAttributedStringKey.font: UIFont(name: "PingFang SC", size: 20.0)!
             ]}()
 
         let searchController = UISearchController(searchResultsController: nil)
@@ -53,7 +58,7 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
             self.navigationItem.searchController = searchController
             self.navigationController?.navigationBar.largeTitleTextAttributes = {[
                 NSAttributedStringKey.foregroundColor: UIColor.white,
-                NSAttributedStringKey.font: UIFont(name: "Zapfino", size: 20.0)!
+                NSAttributedStringKey.font: UIFont(name: "PingFang SC", size: 22.0)!
                 ]}()
         } else {
             // Fallback on earlier versions
@@ -154,7 +159,7 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         minimizeTitle.text = "New Password"
         minimizeTitle.textColor = .white
         minimizeTitle.textAlignment = .center
-        minimizeTitle.attributedText = NSAttributedString(string: (minimizeTitle.text)!, attributes:[NSAttributedStringKey.font: UIFont(name: "Zapfino", size: 14.0)!])
+        minimizeTitle.attributedText = NSAttributedString(string: (minimizeTitle.text)!, attributes:[NSAttributedStringKey.font: UIFont(name: "PingFang SC", size: 16.0)!])
         self.minimizeView?.addSubview(minimizeTitle)
         self.minimizeView?.tag = 1
         let maskPath = UIBezierPath.init(roundedRect: (self.minimizeView?.bounds)!, byRoundingCorners: UIRectCorner(rawValue: UIRectCorner.RawValue(UInt8(UIRectCorner.topLeft.rawValue) | UInt8(UIRectCorner.topRight.rawValue))), cornerRadii: CGSize.init(width: 10, height: 10))
@@ -189,6 +194,9 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(self.datatable == nil){
+            return 0;
+        }
         if #available(iOS 11.0, *) {
             if navigationItem.searchController?.isActive == true {
                 return self.searchDataTable.count
@@ -265,6 +273,34 @@ class TableViewController: UIViewController, UISearchResultsUpdating, UITableVie
         try! SQLiteUtils.db.run(SQLiteUtils.table.filter(SQLiteUtils.id == row[SQLiteUtils.id]).delete())
 
         self.tableview.reloadData()
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "你好，我的名字叫辛巴！！"
+        
+        let paragraph = NSMutableParagraphStyle.init()
+        paragraph.lineBreakMode = NSLineBreakMode.byWordWrapping
+        paragraph.alignment = NSTextAlignment.center
+        
+        let attributes = {[
+            NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14),
+            NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+            NSAttributedStringKey.paragraphStyle: paragraph
+            ]}
+        return NSAttributedString(string: text, attributes: attributes())
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = "Empty"
+        let attributes = {[
+            NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18),
+            NSAttributedStringKey.foregroundColor: UIColor.red
+            ]}
+        return NSAttributedString(string: title, attributes: attributes())
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage.init(named: "default")
     }
     
     /// 滚动试图页面，改变NavigationBar形态、ToolBar等控件
